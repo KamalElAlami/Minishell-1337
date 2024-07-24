@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:23:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/11 15:25:10 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/07/24 22:58:55 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,3 @@ char	*expansion(char *token, t_minishell *mini)
 		token = ft_strdup(join_it);
 	return (token);
 }
-
-// $$$$$$$$$$$$$$$USER
-/*
-case to check
-	'$USER'
-	$$USER
-	$USER
-	"$USER"
-	"'$USER'"
-	"$$$$USER"
-*/

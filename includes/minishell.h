@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/21 20:47:18 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/07/24 17:00:57 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**env_to_array(t_env *env_list);
 int	node_len(t_cmd *cmds);
 int     my_execve(t_minishell *mini, t_cmd *cmds);
 char    *find_cmd(t_minishell *mini, char *cmd);
-int     execution(t_minishell *mini, t_cmd *cmds);
+int 	exec( t_minishell *info , t_cmd *cmd);
 void print_linked_list(t_cmd **cmd);
 int     check_token(char *token);
 void	del_one_env(t_env *lst, void (*del)(void *));

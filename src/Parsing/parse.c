@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/21 18:51:02 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/07/24 17:00:23 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 	if (mini->start)
 	{
 		send_to_execution(mini->start, cmds);
-		mini->ret_value = execution(mini, *cmds);
+		mini->ret_value = exec(mini, *cmds);
 	}
 }
