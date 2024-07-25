@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/24 16:05:51 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:48:15 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ struct s_cmd
 {
 	char		**cmd;
 	char		**red;
+	int			fdp[2];
+	int			fd[2];
 	struct s_cmd	*next;
+	struct s_cmd	*prev;
 };
 
 struct s_minishell

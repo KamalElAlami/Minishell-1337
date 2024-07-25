@@ -6,24 +6,11 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 15:28:16 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/07/24 23:59:50 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/07/25 23:23:45 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int size_list(t_cmd *cmd)
-{
-    int count;
-
-    count = 0
-    while (cmd)
-    {
-        count++;
-        cmd = cmd->next;
-    }
-    return (count - 1);
-}
 
 static char **get_path(t_env *env)
 {
@@ -55,15 +42,28 @@ char *check_cmd(char *cmd, char **path)
 int pipes(t_minishell *info, t_cmd *cmd)
 {
     int pid;
-    int fdp[2];
     char **path;
     char *command;
     int len;
 
-    len = size_list(cmd);
+    len = node_len(cmd);
     path = get_path(info->env);
     while (cmd)
     {
+        printf("cmd => %s\n", cmd->cmd[0]);
+        t_cmd *tmp = cmd;
+        while (tmp)
+        {
+            int i = 0;
+            while (tmp->red[i])
+                printf("%s ", tmp->red[i++]);
+            tmp = tmp->next;
+        }
+        if (cmd->next)
+        {
+            if (pipe(cmd->fdp) == -1)
+                return (-1);
+        }
         pid = fork();
         if (pid == -1)
             return (-1);
@@ -71,15 +71,15 @@ int pipes(t_minishell *info, t_cmd *cmd)
         {
             if (cmd->next)
             {
-                if (pipe(fdp) == -1)
-                    return (-1);
+                close(cmd->fdp[0]);
+                dup2(cmd->fdp[1], 1);
             }
-            if (cmd->next)
+            if (cmd->prev)
             {
-                dup2(fdp[1], 1);
-                close(fdp[0]);
+                close(cmd->prev->fdp[1]);
+                dup2(cmd->prev->fdp[0], 0);
             }
-            dup2(fdp[0], 0);
+           
             command = check_cmd(ft_strjoin("/", cmd->cmd[0]), path);
             if (command)
             {
@@ -90,30 +90,26 @@ int pipes(t_minishell *info, t_cmd *cmd)
             else
                 perror("command not found");
         }
+        else
+        {
+            if (cmd->prev)
+            {
+                close(cmd->prev->fdp[0]);
+                close(cmd->prev->fdp[1]);
+            }
+        }
         cmd = cmd->next;
     }
-    whi
-    // return (0);
+    while (len--)
+    {
+        wait(NULL);
+    }
+    return (0);
 }
+
 int exec(t_minishell *info, t_cmd *cmd)
 {
     if (pipes(info, cmd) == -1)
         perror("Error has occured");
-    // while (cmd)
-    // {
-    //     int i = 0;
-    //     while (cmd->cmd[i])
-    //         printf("%s\n", cmd->cmd[i++]);
-    //     cmd = cmd->next;
-    // }
-    // t_env *siko;
-
-    // siko = info->env;
-
-    // while (siko)
-    // {
-    //     printf("key => %s\nvalue => %s\n", siko->key, siko->value);
-    //     siko = siko->next;
-    // }
     return 0;
 }
