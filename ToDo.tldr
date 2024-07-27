@@ -43,9 +43,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 354.8566542829974,
-			"y": 545.0777549624423,
-			"lastActivityTimestamp": 1721945800704,
+			"x": 709.62109375,
+			"y": 449.55859375,
+			"lastActivityTimestamp": 1722013565817,
 			"meta": {}
 		},
 		{
@@ -72,8 +72,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 741,
-				"h": 973
+				"w": 1094,
+				"h": 656
 			},
 			"insets": [
 				false,
@@ -116,8 +116,8 @@
 			"typeName": "instance_page_state"
 		},
 		{
-			"x": -68.96602928299741,
-			"y": 119.53943253755763,
+			"x": -249.78515625,
+			"y": -186.38671875,
 			"z": 1,
 			"meta": {},
 			"id": "camera:page:page",
@@ -135,8 +135,8 @@
 			"props": {
 				"color": "black",
 				"size": "m",
-				"w": 788.3984375,
-				"text": "Pipe                    x\n\nRedirection\n        loop over all files in the red[][] \n        create all of them and close thier fds except the last one\n        return the fd of the last file\n  \nexit status\n\nsignals\n\nbuilt-ins\n\nErrors",
+				"w": 810.09375,
+				"text": "Pipe                    x\n\nRedirection\n        loop over all files in the red[][] x\n        create all of them and close thier fds except the last one x\n        save fd of the last file x\n        heredoc \n  \nexit status\n\nsignals\n\nbuilt-ins\n\nErrors",
 				"font": "draw",
 				"textAlign": "start",
 				"autoSize": true,

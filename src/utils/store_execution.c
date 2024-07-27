@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/25 21:49:32 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:05:34 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ t_cmd	*new_cmd(int cmd, int red)
 	new->prev = NULL;
 	new->fdp[0] = 0;
 	new->fdp[1] = 0;
-	new->fd[0] = 0;
-	new->fd[1] = 1;
+	new->red_fd[0] = 0;
+	new->red_fd[1] = 1;
 	return (new);
 }
 

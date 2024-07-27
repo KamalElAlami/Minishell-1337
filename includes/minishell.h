@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/24 17:00:57 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/07/26 21:58:02 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,3 +75,9 @@ void		parse_input(t_minishell *mini, t_cmd **cmds);
 void		append_token(t_tokenizer **tokens, t_tokenizer *token);
 int			ft_isspace(char c);
 int			is_special(int c);
+
+/* Execution part*/
+
+int			pipes(t_minishell *info, t_cmd *cmd);
+void		create_file(t_cmd *cmd, t_minishell *info);
+char 		**get_env(t_env *env);

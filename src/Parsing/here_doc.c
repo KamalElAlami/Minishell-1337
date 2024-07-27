@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/06/10 13:11:24 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/07/24 16:48:35 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int     here_doc(t_tokenizer *delimiter, t_minishell *mini)
                 free(input);
         }
         close(mini->fdin);
+	mini->infile = open("/tmp/.ana_machi_heredoc", O_RDWR | O_CREAT | O_TRUNC, 0644);
         return (1);
 }
