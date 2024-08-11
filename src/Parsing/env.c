@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:45:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/09 22:17:06 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/11 20:53:34 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	clear_env(t_env **lst, void (*del)(void *))
 		*lst = tmp;
 	}
         lst = NULL;
-}
+}               
 
 int     store_env(char **envr, t_env **env)
 {

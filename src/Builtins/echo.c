@@ -6,36 +6,60 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/17 22:44:55 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/07 09:40:06 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int     echo(t_tokenizer *token)
+char   **check_args(char **cmd, int *count)
 {
-       if (token && ft_strcmp(token->token, "-n") == 0)
+       int    i;
+       int    j;
+
+       i = 1;
+       while (cmd[i])
        {
-              if (token->next)
-                     token = token->next;
-              while (token)
+              j = 1;
+              if (cmd[i][0] == '-')
               {
-                     printf("%s", token->token);
-                     token = token->next;
-                     if (token)
-                            printf(" ");
+                     while (cmd[i][j] && cmd[i][j] == 'n')
+                            j++;
+                     if (cmd[i][j] != '\0')
+                            return (&cmd[i]);
+                     else
+                     {
+                            (*count)++;
+                            i++;
+                            continue;
+                     }
               }
+              else
+                     return (&cmd[i]);
        }
-       else
+       return (NULL);
+}
+
+int     echo(t_cmd *cmd)
+{
+       char   **args;
+       int    i;
+       int    j;
+
+       i = 0;
+       args = check_args(cmd->cmd, &i);
+       j = 0;
+       if (args)
        {
-              while (token)
+              while (args[j])
               {
-                     printf("%s", token->token);
-                     token = token->next;
-                     if (token)
-                            printf(" ");
+                     ft_putstr_fd(args[j], 1);
+                     if (args[j + 1])
+                            ft_putstr_fd(" ", 1);
+                     j++;
               }
-              printf("\n");
+              if (!i)
+                     ft_putstr_fd("\n", 1);
        }
        return (0);
 }

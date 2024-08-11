@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/06 19:22:37 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/07 20:59:15 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,47 @@ int    set_env(t_env **env, char *key, char *value)
         return (0);
 }
 
-int     cd(t_tokenizer *token, t_env *env)
+int     cd(t_cmd *cmd, t_env *env)
 {
         char    *path;
         char    *oldpwd;
         char    *pwd;
-        
+
         path = NULL;
         oldpwd = getcwd(NULL, 0);
-        if (!token)
+        if (!cmd->cmd[1])
         {
                 path = get_values(&env, "HOME");
                 if (chdir(path) == -1)
                 {
-                printf("cd: %s: No such file or directory\n", path);
-                return (1);
+                        ft_putstr_fd("Minishell : cd: ", 2);
+                        ft_putstr_fd(path, 2);
+                        ft_putstr_fd(" No such file or directory ", 2);
+                        ft_putstr_fd("\n", 2);
+                        return (1);
                 }
         }
         else
         {
-                path = token->token;
+                path = cmd->cmd[1];
                 if (chdir(path) == -1)
                 {
-                printf("cd: %s: No such file or directory\n", path);
-                return (1);
+                        if (!access(path, F_OK))
+                        {
+                                ft_putstr_fd("Minishell : cd: ", 2);
+                                ft_putstr_fd(path, 2);
+                                ft_putendl_fd(" Permission denied ", 2);
+                        }
+                        else
+                        {
+                                ft_putstr_fd("Minishell : cd: ", 2);
+                                ft_putstr_fd(path, 2);
+                                ft_putendl_fd(" No such file or directory ", 2);
+                        }
+                        return (1);
                 }
         }
-        pwd = getcwd(NULL, 0);
+       pwd = getcwd(NULL, 0);
         if (!set_env(&env, "OLDPWD", oldpwd))
                 append_env(&env, new_env("OLDPWD", ft_strdup("")));
         if (!set_env(&env, "PWD", pwd))

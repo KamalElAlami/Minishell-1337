@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/26 14:05:34 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/07/19 21:16:09 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void append_to_exec(t_cmd **cmds, t_cmd *cmd)
     while (head->next)
         head = head->next;
     head->next = cmd;
-	cmd->prev = head; // i added this line need to check
 }
 
 t_cmd	*new_cmd(int cmd, int red)
@@ -42,11 +41,6 @@ t_cmd	*new_cmd(int cmd, int red)
 	new->cmd[cmd] = NULL;
 	new->red[red] = NULL;
 	new->next = NULL;
-	new->prev = NULL;
-	new->fdp[0] = 0;
-	new->fdp[1] = 0;
-	new->red_fd[0] = 0;
-	new->red_fd[1] = 1;
 	return (new);
 }
 

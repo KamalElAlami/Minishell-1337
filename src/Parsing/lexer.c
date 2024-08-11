@@ -6,11 +6,18 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 05:59:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/18 16:14:33 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/07 20:48:41 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	check_word_input(char c)
+{
+	if (c == '|' || c == '>' || c == '<' || c == ' ')
+		return (1);
+	return (0);
+}
 
 t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat)
 {
@@ -38,9 +45,35 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 	j = 0;
 	stat = malloc(sizeof(t_stat));
 	*stat = GENERAL;
-	while (input[*i] && (!is_special(input[*i]) && !ft_isspace(input[*i])))
+	while (input[*i] && !check_word_input(input[*i]))
 	{
 		j++;
+		if (input[*i] == '\'')
+		{
+			*stat = INQUOTES;
+			(*i)++;
+			while (input[*i] && input[*i] != '\'')
+			{
+				j++;
+				(*i)++;
+			}
+			if (input[*i] != '\'')
+				return (printf("error with single quotes\n"), NULL);
+			j++;
+		}
+		else if (input[*i] == '"')
+		{
+			*stat = INDQUOTES;
+			(*i)++;
+			while (input[*i] && input[*i] != '"')
+			{
+				j++;
+				(*i)++;
+			}
+			if (input[*i] != '"')
+				return (printf("error with single quotes\n"), NULL);
+			j++;
+		}
 		(*i)++;
 	}
 	s = ft_substr(input, *i - j, *i);
@@ -83,7 +116,8 @@ t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i)
 		node = make_node(input, &j, &type[6], stat);
 	else if (input[*i] && input[*i] == ' ')
 		node = make_node(input, &j, &type[3], stat);
-	(*i)++;
+	if (input[*i])
+		(*i)++;
 	return (node);
 }
 

@@ -3,38 +3,93 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 17:46:45 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/11 16:09:44 by omghazi          ###   ########.fr       */
+/*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
+/*   Updated: 2024/08/11 21:37:14 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int     check_export(char c)
+int     ft_strnchr(const char *s, int c)
 {
-        return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
+        int i = 0;
+
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return (i);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return (i);
+	return (0);
+}
+int     join_string(char c, char next_c, int is_last, int *flag)
+{
+        if (c == '+' && is_last
+                && next_c && next_c == '=')
+        {
+                *flag = 1;                
+                return (1);
+        }
+        return (0);
 }
 
-void    join_nodes(t_tokenizer **token)
+int isvalid(char *arg, int *join_flag)
 {
-        t_tokenizer *tmp;
+        int     i;
+        int     error;
+        char    *id;
 
-        tmp = *token;
-        while (tmp->next)
+        i = 1;
+        error = 0;
+        if (!arg)
+                return (0);
+        if (ft_strchr(arg, '='))
+                id = ft_substr(arg, 0, ft_strnchr(arg, '='));
+        else
+                id = arg;
+        if (!ft_isalpha(id[0]) && id[0] != '_')
+                return (0);
+        while (id[i])
         {
-                if (*tmp->stat != *tmp->next->stat)
+                if (i == (int)ft_strlen(id) - 1)
                 {
-                        tmp->token = ft_strjoin(tmp->token, tmp->next->token);
-                        tmp->next = tmp->next->next;
-                        if (tmp->next)
-                                tmp->next->prev = tmp;
+                        if (join_string(id[i], arg[i + 1], i == (int)ft_strlen(id) - 1, join_flag))
+                        {
+                                i++;
+                                continue ;
+                        }
                 }
-                else
-                        tmp = tmp->next;
+                else if (!ft_isalnum(id[i]) && id[i] != '_')
+                        error = 1;
+                i++;
+        }
+        if (error)
+                return (0);
+        return (1);
+}
+
+void split_var(char *arg, char **id, char **value, int flag)
+{
+        *id = NULL;
+        *value = NULL;
+        if (!ft_strchr(arg, '='))
+                *id = arg; 
+        else if (flag)
+        {
+                *id = ft_substr(arg, 0, ft_strnchr(arg, '=') - 1);
+                *value = ft_substr(arg, ft_strnchr(arg, '=') + 1, ft_strlen(arg));
+        }
+        else
+        {
+                *id = ft_substr(arg, 0, ft_strnchr(arg, '='));
+                *value = ft_substr(arg, ft_strnchr(arg, '=') + 1, ft_strlen(arg));
         }
 }
+
 
 void    print_export(t_env *env)
 {
@@ -51,111 +106,67 @@ void    print_export(t_env *env)
         }
 }
 
-int     export(t_tokenizer *token, t_env *env)
+void add_new_node(char *id, char *value, t_env **env)
 {
-        t_env   *tmp;
-        int     flag;
+        t_env *new;
 
-        if (!token)
-                print_export(env);
-        if (token)
+        new = new_env(id, value);
+        append_env(env, new);
+}
+
+void add_value(char *id, char *value, t_env **env, int flag)
+{
+        t_env *tmp;
+        int found;
+
+        tmp = *env;
+        found = 0;
+        while (tmp)
         {
-                join_nodes(&token);
-                while (token)
+                if (ft_strcmp(tmp->key, id) == 0 && !flag)
                 {
-                        if (ft_strlen(token->token) == 0)
+                        tmp->value = value;
+                        found = 1;                        
+                }
+                else if (ft_strcmp(tmp->key, id) == 0 && flag)
+                {
+                        tmp->value = ft_strjoin(tmp->value, value);
+                        found = 1;
+                }
+                tmp = tmp->next;
+        }
+        if (!found)
+                add_new_node(id, value, env);
+        
+}
+
+int     export(t_cmd *cmd, t_env **env)
+{
+        int i;
+        int     flag;
+        char *id;
+        char *value;
+  
+        i = 1;
+        flag = 0;
+        if (!cmd->cmd[1])
+                print_export(*env);
+        else
+        {
+                while (cmd->cmd[i])
+                {
+                        if (isvalid(cmd->cmd[i], &flag))
                         {
-                                if (!token->next)
-                                        print_export(env);
+                                split_var(cmd->cmd[i], &id, &value, flag);
+                                add_value(id, value, env, flag);
                         }
-                        if (!ft_strchr(token->token, '=') && !ft_strchr(token->token, '+'))
-                        {
-                                tmp = env;
-                                flag = 0;
-                                while (tmp)
-                                {
-                                        if (!ft_strcmp(token->token, tmp->key))
-                                        {
-                                                flag = 1;
-                                                break ;
-                                        }
-                                        tmp = tmp->next;
-                                }
-                                if (!flag)
-                                {
-                                        tmp = new_env(ft_strdup(token->token), NULL);
-                                        append_env(&env, tmp);
-                                }
-                        }
-                        else if (ft_strchr(token->token, '=') && !ft_strchr(token->token, '+'))
-                        {
-                                flag = 0;
-                                tmp = env;
-                                while (tmp)
-                                {
-                                        if (!ft_strcmp(ft_split(token->token, '=')[0], tmp->key))
-                                        {
-                                                flag = 1;
-                                                break ;
-                                        }
-                                        tmp = tmp->next;
-                                }
-                                if (!tmp)
-                                        flag = 0;
-                                if (flag)
-                                {
-                                        if (ft_strchr(token->token, '=') && ft_strchr(token->token, '='))
-                                                tmp->value = ft_strdup(ft_strchr(token->token, '=') + 1);
-                                        else
-                                        {
-                                                tmp->value = NULL;
-                                                tmp->key = ft_strdup(token->token);
-                                        }
-                                }
-                                else
-                                {
-                                        tmp = new_env(ft_split(token->token, '=')[0], ft_strdup(ft_strchr(token->token, '=') + 1));
-                                        append_env(&env, tmp);
-                                }
-                        }
-                        else if (ft_strchr(token->token, '+'))
-                        {
-                                if (token && ft_strchr(token->token, '+') && !ft_strchr(token->token, '='))
-                                {
-                                        printf("%sexport: not valid in this context: %s\n%s", YELLOW_COLOR, token->token, RESET);
-                                        return (1);
-                                }
-                                flag = 0;
-                                tmp = env;
-                                while (tmp)
-                                {
-                                        if (!ft_strcmp(ft_split(token->token, '+')[0], tmp->key))
-                                        {
-                                                flag = 1;
-                                                break ;
-                                        }
-                                        tmp = tmp->next;
-                                }
-                                if (!tmp)
-                                        flag = 0;
-                                if (flag)
-                                {
-                                        if (ft_strchr(token->token, '+') && ft_strchr(token->token, '+'))
-                                                tmp->value = ft_strjoin(tmp->value, ft_strpbrk(token->token, "+=") + 2);
-                                        else
-                                        {
-                                                tmp->value = NULL;
-                                                tmp->key = ft_strdup(token->token);
-                                        }
-                                }
-                                else
-                                {
-                                        tmp = new_env(*ft_split(token->token, '+'), ft_strdup(ft_strpbrk(token->token, "+=") + 2));
-                                        append_env(&env, tmp);
-                                }
-                        }
-                        token = token->next;
+                        else
+                                printf("export: %s: not a valid identifier\n", cmd->cmd[i]);
+                        i++;
                 }
         }
-        return (0);
+        return 0;
 }
+//export  NAME=value add variable or edit old one 
+//export  NAME+=value add var 
+//export  NAME initialization

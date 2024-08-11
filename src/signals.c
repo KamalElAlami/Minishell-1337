@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:37:27 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/22 09:33:03 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:48:41 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 void handle_sigint(int sig)
 {
         (void)sig;
-        write(1, "\n", 1);
-        rl_on_new_line();
+        // rl_catch_signals = 0;
+        // write(1, "\n", 1);
+        // rl_on_new_line();
         // rl_replace_line("", 0);
-        rl_redisplay();
-}
-
-void handle_sigquit(int sig)
-{
-        (void)sig;
+        // rl_redisplay();
 }

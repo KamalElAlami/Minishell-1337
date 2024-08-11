@@ -6,17 +6,17 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:51 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/09 22:04:57 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/06 23:00:36 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int     pwd(t_tokenizer *token)
+int     pwd(t_cmd *cmd)
 {
         char* path;
 
-        path = token->token;
+        path = cmd->cmd[0];
         path = getcwd(NULL, 0);
         if (!path)
         {

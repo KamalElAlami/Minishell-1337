@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/26 18:01:46 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/07 20:41:24 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,74 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 	return (1);
 }
 
+void	remove_quotes(t_tokenizer *token)
+{
+	t_tokenizer	*tmp;
+	char		*str;
+	int		i;
+
+	str = NULL;
+	tmp = token;
+	while (tmp)
+	{
+		i = 0;
+		if (*tmp->stat == INDQUOTES)
+		{
+			while (tmp->token[i])
+			{
+				if (tmp->token[i] != '"')
+					str = ft_strjoin(str, ft_substr(tmp->token, i, i + 1));
+				if (tmp->token[i])
+					i++;
+			}
+			tmp->token = ft_strdup(str);
+		}
+		else if (*tmp->stat == INQUOTES)
+		{
+			while (tmp->token[i])
+			{
+				if (tmp->token[i] != '\'')
+					str = ft_strjoin(str, ft_substr(tmp->token, i, i + 1));
+				if (tmp->token[i])
+					i++;
+			}
+			tmp->token = ft_strdup(str);
+		}
+		tmp = tmp->next;
+	}
+}
+
+// void print_commande(t_cmd *cmds)
+// {
+// 	for (t_cmd *head = cmds; head; head = head->next)
+// 	{
+// 		for (int i = 0; head->cmd[i]; i++)
+// 			printf("cmd[%d]: %s\n", i, head->cmd[i]);
+// 		for (int i = 0; head->red[i]; i++)
+// 			printf("red[%d]: %s\n", i, head->red[i]);
+// 		printf("------------\n");
+// 	}
+// }
+
+void print_commande(t_cmd *cmds)
+{
+	for (t_cmd *head = cmds; head; head = head->next)
+	{
+		for (int i = 0; head->cmd[i]; i++)
+			printf("cmd[%d]: %s\n", i, head->cmd[i]);
+		printf("------------\n");
+	}
+}
+
 void	parse_input(t_minishell *mini, t_cmd **cmds)
 {
+	remove_quotes(mini->start);
 	if (!check_validation(mini->start, mini))
 		return ;
 	if (mini->start)
 	{
 		send_to_execution(mini->start, cmds);
-		mini->ret_value = exec(mini, *cmds);
+		mini->cmd = *cmds;
+		mini->ret_value = execution(mini, *cmds);
 	}
 }

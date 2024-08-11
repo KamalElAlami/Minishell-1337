@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_pro_max.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:23:13 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/26 22:09:35 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:52:19 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,3 +65,9 @@ void    count_len(t_tokenizer *lst, int *commands_len, int *redirection_len)
                 }
         }
 }
+
+/*
+
+        < makefile cat | ls -la > i
+
+*/

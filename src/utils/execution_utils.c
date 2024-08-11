@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:54:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/21 19:28:26 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/07/29 17:06:18 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,45 @@ char	*env_join(char const *s1, char const *s2)
 	if (!res)
 		return (NULL);
 	return (fill_envs(s1, s2, &res));
+}
+
+static int	envname_size(t_env *env)
+{
+	int	i;
+
+	if (!env)
+		return (0);
+	i = 1;
+	while (env->next)
+	{
+		if (env->key && env->value)
+			i++;
+		env = env->next;
+	}
+	return (i);
+}
+
+char	**env_to_array(t_env *env_list)
+{
+	int		i;
+	int		size;
+	char	**env;
+
+	if (!env_list)
+		return (NULL);
+	size = envname_size(env_list);
+	env = malloc(sizeof(char *) * (size + 1));
+	if (!env)
+		return (NULL);
+	i = 0;
+	while (env_list)
+	{
+		if (env_list->key && env_list->value)
+		{
+			*(env + i) = env_join(env_list->key, env_list->value);
+			i++;
+		}
+		env_list = env_list->next;
+	}
+	return (*(env + i) = NULL, env);
 }

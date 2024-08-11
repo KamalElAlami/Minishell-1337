@@ -6,48 +6,60 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/04 12:45:21 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/07 15:31:34 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int    ft_isnumber(char *str)
+int     is_valid(char c)
 {
-        int i;
-
-        i = 0;
-        while (str && str[i])
-        {
-                if (!ft_isdigit(str[i]))
-                        return (0);
-                i++;
-        }
-        return (1);
+        return (c == '+' || c == '-' || c == ' ' || c == '|' || c == '\t' || c == '>' || c == '<' || (c > '0' && c <= '9'));
 }
 
-int     ft_exit(t_tokenizer *token)
+int     ft_exit(t_cmd *cmd, t_minishell *mini)
 {
-       if (!token)
-                 exit(0);
-        if (ft_isnumber(token->token))
+        int     res;
+        int     i;
+        int     j;
+        int     flag;
+
+        i = 1;
+        flag = 0;
+        if (!cmd->cmd[1])
+                exit(mini->ret_value);
+        while (cmd->cmd[i])
         {
-                if (token->next)
+                j = 0;
+                if (i > 1)
                 {
-                        printf("exit\n");
-                        printf("%sminishell: exit: too many arguments\n%s", RED_COLOR, RESET);
+                        ft_putendl_fd("exit", 2);
+                        ft_putstr_fd("Minishell : exit: too many arguments\n", 2);
                         return (1);
                 }
-                else
+                while (cmd->cmd[i][j])
                 {
-                        printf("exit\n");
-                        exit(ft_atoi(token->token));
+                        if (!is_valid(cmd->cmd[i][j]))
+                        {
+                                flag = 1;
+                                break;
+                        }
+                        j++;
                 }
+                if (flag)
+                        break;
+                i++;
         }
-        else
+        if (flag)
         {
-                printf("exit\n");
-                printf("%sminishell: exit: %s: numeric argument required\n%s",RED_COLOR, token->token, RESET);
+                ft_putstr_fd("Minishell : exit: ", 2);
+                ft_putstr_fd(cmd->cmd[1], 2);
+                ft_putstr_fd(": numeric argument required\n", 2);
                 exit(255);
         }
+        res = ft_atoi(cmd->cmd[1]);
+        if (res < 0)
+                res = 256 + res;
+        exit(res);
+        return (0);
 }

@@ -3,19 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/24 15:28:16 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/07/26 18:13:38 by kael-ala         ###   ########.fr       */
+/*   Created: 2024/07/20 09:42:00 by omghazi           #+#    #+#             */
+/*   Updated: 2024/08/06 22:31:52 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int exec(t_minishell *info, t_cmd *cmd)
+int     execution(t_minishell *mini, t_cmd *cmds)
 {
-    create_file(cmd, info);
-    if (pipes(info, cmd) == -1)
-        perror("Error has occured");
-    return 0;
+	if (node_len(cmds) == 1)
+		return (single_process(mini, cmds));
+	else
+	{
+		mini->pipe = (int **)malloc(sizeof(int *) * node_len(cmds) - 1);
+		if (!mini->pipe)
+			return (1);
+                return (multi_process(mini, cmds));
+	}
+	return (mini->ret_value);
 }
