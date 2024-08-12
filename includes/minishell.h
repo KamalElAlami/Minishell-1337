@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/11 14:54:56 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:13:43 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include <readline/readline.h>
+#include <termios.h>
 #include <readline/history.h>
+#include <readline/readline.h>
 
 /* FUNCTIONS */
 int 	process(t_minishell *mini, t_cmd *cmds, int input, int output);
@@ -41,8 +42,6 @@ int     my_execve(t_minishell *mini, t_cmd *cmds);
 char    *find_cmd(t_minishell *mini, char *cmd);
 int     execution(t_minishell *mini, t_cmd *cmds);
 void	del_one_env(t_env *lst, void (*del)(void *));
-void	 handle_sigint(int sig);
-void	 handle_sigquit(int sig);
 t_env	*new_env(char *key, char *value);
 void    append_env(t_env **env, t_env *node);
 char    *get_values(t_env **env, char *key);
@@ -52,7 +51,7 @@ int		env(t_env *env);
 int		pwd(t_cmd *cmd);
 int		export(t_cmd *cmd, t_env **env);
 int		ft_exit(t_cmd *cmd, t_minishell *mini);
-int		echo(t_cmd *cmd);
+int		echo(t_cmd *cmd);	
 int		cd(t_cmd *cmd, t_env *env);
 int		unset(t_cmd *token, t_env **env);
 void	send_to_execution(t_tokenizer *token, t_cmd **cmd);
@@ -82,3 +81,9 @@ void		parse_input(t_minishell *mini, t_cmd **cmds);
 void		append_token(t_tokenizer **tokens, t_tokenizer *token);
 int			ft_isspace(char c);
 int			is_special(int c);
+
+// signals
+
+void	handle_sigint(int sig);
+void	handle_sigquit(int sig);
+void	quit_hundler(int sig);

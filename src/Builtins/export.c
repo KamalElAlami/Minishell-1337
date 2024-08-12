@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/11 21:37:14 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:36:40 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,9 @@ int     export(t_cmd *cmd, t_env **env)
         {
                 while (cmd->cmd[i])
                 {
-                        if (isvalid(cmd->cmd[i], &flag))
+                        if (ft_strlen(cmd->cmd[i]) == 0)
+                                print_export(*env); 
+                        else if (isvalid(cmd->cmd[i], &flag))
                         {
                                 split_var(cmd->cmd[i], &id, &value, flag);
                                 add_value(id, value, env, flag);
@@ -165,7 +167,7 @@ int     export(t_cmd *cmd, t_env **env)
                         i++;
                 }
         }
-        return 0;
+        return (0);
 }
 //export  NAME=value add variable or edit old one 
 //export  NAME+=value add var 

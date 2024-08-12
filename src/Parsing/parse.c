@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 20:41:24 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/12 15:43:01 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,6 @@ void	remove_quotes(t_tokenizer *token)
 		tmp = tmp->next;
 	}
 }
-
-// void print_commande(t_cmd *cmds)
-// {
-// 	for (t_cmd *head = cmds; head; head = head->next)
-// 	{
-// 		for (int i = 0; head->cmd[i]; i++)
-// 			printf("cmd[%d]: %s\n", i, head->cmd[i]);
-// 		for (int i = 0; head->red[i]; i++)
-// 			printf("red[%d]: %s\n", i, head->red[i]);
-// 		printf("------------\n");
-// 	}
-// }
 
 void print_commande(t_cmd *cmds)
 {
