@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/06 22:45:26 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/14 23:24:33 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	first_commande(t_minishell *mini, t_cmd *cmd)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		close(mini->pipe[0][0]);
 		process(mini, cmd, STDIN_FILENO, mini->pipe[0][1]);
 	}
@@ -45,6 +46,7 @@ int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		close(mini->pipe[i][0]);
 		process(mini, cmd, mini->pipe[i - 1][0], mini->pipe[i][1]);
 	}
@@ -66,7 +68,10 @@ int	last_cmd(t_minishell *mini, t_cmd *cmd, int i)
 	if (pid == -1)	
 		return (perror("fork"), ERROR);
 	if (!pid)
+	{
+		signal(SIGQUIT, SIG_DFL);
 		process(mini, cmd, mini->pipe[i - 2][0], STDOUT_FILENO);
+	}
 	if (close(mini->pipe[i - 2][0]))
 		return (perror("close"), ERROR);
 	waitpid(pid, &mini->ret_value, 0);
@@ -92,9 +97,6 @@ int     multi_process(t_minishell *mini, t_cmd *cmds)
 	last_cmd(mini, tmp, i);
 	while (wait(NULL) > 0)
 		;
-	if (WIFEXITED(mini->ret_value))
-		mini->ret_value = WEXITSTATUS(mini->ret_value);
-	else if (WIFSIGNALED(mini->ret_value))
-		mini->ret_value = WTERMSIG(mini->ret_value);
+	mini->ret_value = getexstatus(mini->ret_value);
 	return (mini->ret_value);
 }

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/12 18:13:43 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/14 21:14:42 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,5 @@ int			is_special(int c);
 void	handle_sigint(int sig);
 void	handle_sigquit(int sig);
 void	quit_hundler(int sig);
+void	set_sigs(void);
+int		getexstatus(int stts);

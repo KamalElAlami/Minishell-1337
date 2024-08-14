@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/12 18:14:06 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/14 23:23:39 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int     single_process(t_minishell *mini, t_cmd *cmds)
 
         mini->fdin = dup(STDIN_FILENO);
 	mini->fdout = dup(STDOUT_FILENO);
-        signal(SIGTERM, quit_hundler);
         if (red_process(mini, cmds, STDIN_FILENO, STDOUT_FILENO) == -1)
                 return (1);
         status = execute_single_commande(mini, cmds);
@@ -43,12 +42,12 @@ int     execute_single_commande(t_minishell *mini, t_cmd *cmd)
                 if (pid == -1)
                         return (perror("fork"), 1);
                 if (pid == 0)
+                {
+                        signal(SIGQUIT, SIG_DFL);
                         status = my_execve(mini, cmd);
+                }
                 waitpid(pid, &status, 0);
-                if (WIFEXITED(status))
-                        status = WEXITSTATUS(status);
-                else if (WIFSIGNALED(status))
-                        status = WTERMSIG(status);
+                status = getexstatus(status);
         }
         return (status);
 }
@@ -74,3 +73,6 @@ int     execute_builtin(t_minishell *mini, t_cmd *cmd)
         }
         return (0);
 }
+
+
+// no fork  cd export exit

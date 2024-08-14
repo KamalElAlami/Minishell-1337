@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 20:45:44 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/14 15:58:25 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 #define UNKNOWN_COMMAND 	127
 #define IS_DIR 			126
 #define EXPAND 			-1337
+
+int	signal_exit;
 
 typedef struct s_node				t_node;
 typedef struct s_minishell			t_minishell;

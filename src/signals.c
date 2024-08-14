@@ -5,12 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 17:37:27 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/12 18:14:38 by kael-ala         ###   ########.fr       */
+/*   Created: 2024/08/13 16:28:58 by kael-ala          #+#    #+#             */
+/*   Updated: 2024/08/14 23:25:27 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include <minishell.h>
+
+extern int signal_exit;
+
+int getexstatus(int stts)
+{
+        int ret;
+
+        if (WIFSIGNALED(stts))
+        {
+                ret = WTERMSIG(stts);
+                if (ret == SIGINT)
+                        return (130);
+                else if (ret ==  SIGQUIT)
+                {
+                        printf("QUIT: 3\n");
+                        return (131);
+                }
+                else
+                        return (128 + ret);
+        }
+        return (WEXITSTATUS(stts));
+}
 
 void quit_hundler(int sig)
 {
@@ -36,4 +60,24 @@ void handle_sigint(int sig)
                 rl_replace_line("", 0);
                 rl_redisplay();
         }
+        
 }
+
+void set_sigs(void)
+{
+        struct sigaction siig;
+
+        siig.sa_handler = handle_sigint;
+        sigemptyset(&siig.sa_mask);
+        siig.sa_flags = SA_RESTART;
+
+        sigaction(SIGINT, &siig, NULL);
+        signal(SIGQUIT, SIG_IGN);
+        signal(SIGTSTP, SIG_IGN);
+}
+// void sig_hundler(int sig)
+// {
+//         if (sig == SIGINT);
+//         else if (sig == SIGTERM);
+//         else if (sig == SIG_IGN);
+// }

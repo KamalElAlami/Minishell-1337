@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/12 15:36:40 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/13 14:04:13 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,14 +149,13 @@ int     export(t_cmd *cmd, t_env **env)
   
         i = 1;
         flag = 0;
-        if (!cmd->cmd[1])
+        if (!cmd->cmd[1] || (ft_strlen(cmd->cmd[1]) == 0 && !cmd->cmd[2]))
                 print_export(*env);
         else
         {
                 while (cmd->cmd[i])
                 {
-                        if (ft_strlen(cmd->cmd[i]) == 0)
-                                print_export(*env); 
+                        if (ft_strlen(cmd->cmd[i]) == 0);
                         else if (isvalid(cmd->cmd[i], &flag))
                         {
                                 split_var(cmd->cmd[i], &id, &value, flag);
