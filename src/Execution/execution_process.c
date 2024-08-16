@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/14 23:23:39 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:08:44 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int     execute_single_commande(t_minishell *mini, t_cmd *cmd)
                         return (perror("fork"), 1);
                 if (pid == 0)
                 {
-                        signal(SIGQUIT, SIG_DFL);
+                        reset_sigs();
                         status = my_execve(mini, cmd);
                 }
                 waitpid(pid, &status, 0);
@@ -73,6 +73,3 @@ int     execute_builtin(t_minishell *mini, t_cmd *cmd)
         }
         return (0);
 }
-
-
-// no fork  cd export exit

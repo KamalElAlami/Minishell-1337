@@ -6,15 +6,12 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:28:58 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/14 23:25:27 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:22:21 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include <minishell.h>
 
-extern int signal_exit;
 
 int getexstatus(int stts)
 {
@@ -62,7 +59,12 @@ void handle_sigint(int sig)
         }
         
 }
-
+void reset_sigs(void)
+{
+        signal(SIGQUIT, SIG_DFL);
+        signal(SIGINT, SIG_DFL);
+        signal(SIGTSTP, SIG_DFL);
+}
 void set_sigs(void)
 {
         struct sigaction siig;

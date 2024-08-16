@@ -6,12 +6,11 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/13 18:17:33 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:57:36 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 int     here_doc(t_tokenizer *delimiter, t_minishell *mini)
 {

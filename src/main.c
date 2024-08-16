@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/13 18:41:13 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:22:14 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int argc, char **argv, char **env)
 	t_tokenizer	*lexer;
 	t_env		*envr;
 	t_cmd		*cmds;
+	struct termios original_termios;
 
 	(void)argc;
 	(void)argv;
@@ -33,10 +34,10 @@ int	main(int argc, char **argv, char **env)
 	store_env(env, &envr);
 	minishell->ret_value = 0;	
 	minishell->env = envr;
-	signal(SIGINT, handle_sigint);
+	tcgetattr(STDIN_FILENO, &original_termios);
+	set_sigs();
 	while (1)
 	{	
-		set_sigs();
 		minishell->line = readline("\x1b[32mminishell-1.0$\x1b[0m :");
 		if (!minishell->line)
 			return (minishell->ret_value);
@@ -44,6 +45,7 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		minishell->start = lexer;
 		parse_input(minishell, &cmds);
+		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
 		if (minishell->line)
 		{
 			add_history(minishell->line);

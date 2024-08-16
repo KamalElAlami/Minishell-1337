@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/14 21:14:42 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:22:29 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <termios.h>
 #include <readline/history.h>
 #include <readline/readline.h>
+
 
 /* FUNCTIONS */
 int 	process(t_minishell *mini, t_cmd *cmds, int input, int output);
@@ -89,3 +90,4 @@ void	handle_sigquit(int sig);
 void	quit_hundler(int sig);
 void	set_sigs(void);
 int		getexstatus(int stts);
+void	reset_sigs(void);

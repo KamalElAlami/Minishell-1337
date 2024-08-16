@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/14 23:24:33 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:09:44 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	first_commande(t_minishell *mini, t_cmd *cmd)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
-		signal(SIGQUIT, SIG_DFL);
+		reset_sigs();
 		close(mini->pipe[0][0]);
 		process(mini, cmd, STDIN_FILENO, mini->pipe[0][1]);
 	}
@@ -32,7 +32,7 @@ int	first_commande(t_minishell *mini, t_cmd *cmd)
 		if (close(mini->pipe[0][1]) == -1)
 			return (perror("close"), ERROR);
 	return (0);
-}
+} 
 
 int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 {
@@ -46,7 +46,7 @@ int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
-		signal(SIGQUIT, SIG_DFL);
+		reset_sigs();
 		close(mini->pipe[i][0]);
 		process(mini, cmd, mini->pipe[i - 1][0], mini->pipe[i][1]);
 	}
@@ -69,7 +69,7 @@ int	last_cmd(t_minishell *mini, t_cmd *cmd, int i)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
-		signal(SIGQUIT, SIG_DFL);
+		reset_sigs();
 		process(mini, cmd, mini->pipe[i - 2][0], STDOUT_FILENO);
 	}
 	if (close(mini->pipe[i - 2][0]))
