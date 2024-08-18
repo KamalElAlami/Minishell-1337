@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 20:59:15 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/10 20:01:44 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int     cd(t_cmd *cmd, t_env *env)
                         return (1);
                 }
         }
-       pwd = getcwd(NULL, 0);
+        pwd = getcwd(NULL, 0);
         if (!set_env(&env, "OLDPWD", oldpwd))
                 append_env(&env, new_env("OLDPWD", ft_strdup("")));
         if (!set_env(&env, "PWD", pwd))

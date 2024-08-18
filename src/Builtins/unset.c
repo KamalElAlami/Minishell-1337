@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:47:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 09:52:11 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/13 14:09:37 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,50 @@ int     check_unset(char c)
 
 int     unset(t_cmd *cmd, t_env **env)
 {
+        t_env *tmp;
+        t_env *prev;
+        int flag;
         int     i;
-        int     j;
-        t_env   *tmp;
 
+        if (!cmd->cmd[1])
+                return (0);
+        tmp = *env;
+        prev = *env;
         i = 1;
         while (cmd->cmd[i])
         {
-                j = 0;
-                while (cmd->cmd[i][j])
-                {
-                        if (!check_unset(cmd->cmd[i][j]))
-                        {
-                                ft_putstr_fd("minishell: unset: `", 2);
-                                ft_putchar_fd(cmd->cmd[i][j], 2);
-                                ft_putendl_fd("': not a valid identifier", 2);
-                                return (1);
-                        }
-                        j++;
-                }
                 tmp = *env;
-                while (tmp)
+                prev = *env;
+                flag = 0;
+                if (!check_unset(cmd->cmd[0][0]))
+                        return (printf("unset: `%s': not a valid identifier\n", cmd->cmd[i]), 1);
+                else if (!ft_strcmp(cmd->cmd[i], tmp->key))
                 {
-                        if (!ft_strcmp(tmp->key, cmd->cmd[i]))
-                        {
-                                free(tmp->key);
-                                free(tmp->value);
-                                tmp->key = NULL;
-                                tmp->value = NULL;
-                                *env = tmp->next;
-                                return (0);
-                        }
-                        tmp = tmp->next;
+                        *env = tmp->next;
+                        if (cmd->cmd[i + 1])
+                               i++;
+                        continue;
                 }
-                i++;
+                else
+                {
+                        while (tmp)
+                        {
+                                if (!ft_strcmp(cmd->cmd[i], tmp->key))
+                                {
+                                        if (tmp == *env)
+                                                (*env) = (*env)->next;
+                                        else
+                                                prev->next = tmp->next;
+                                        flag = 1;
+                                        break ;
+                                }
+                                prev = tmp;
+                                tmp = tmp->next;
+                        }
+                }
+                if (!flag)
+                        return (0);
+               i++;
         }
         return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/16 10:09:44 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:39:52 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	first_commande(t_minishell *mini, t_cmd *cmd)
 		if (close(mini->pipe[0][1]) == -1)
 			return (perror("close"), ERROR);
 	return (0);
-} 
+}
 
 int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 {

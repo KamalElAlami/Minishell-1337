@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:28:58 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/16 16:22:21 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:50:11 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,17 @@ void disable_echo(void)
 
 void handle_sigint(int sig)
 {
-        if (sig == SIGINT)
-        {
-                disable_echo();
-                write(1, "\n", 1);
-                rl_on_new_line();
-                rl_replace_line("", 0);
-                rl_redisplay();
-        }
-        
+        (void)sig;
+        disable_echo();
+        g_exit_stts = 1;
+        write(1, "\n", 1);
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
 }
 void reset_sigs(void)
 {
         signal(SIGQUIT, SIG_DFL);
-        signal(SIGINT, SIG_DFL);
         signal(SIGTSTP, SIG_DFL);
 }
 void set_sigs(void)
@@ -77,9 +74,3 @@ void set_sigs(void)
         signal(SIGQUIT, SIG_IGN);
         signal(SIGTSTP, SIG_IGN);
 }
-// void sig_hundler(int sig)
-// {
-//         if (sig == SIGINT);
-//         else if (sig == SIGTERM);
-//         else if (sig == SIG_IGN);
-// }

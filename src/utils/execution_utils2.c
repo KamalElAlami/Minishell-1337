@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:26:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/02 15:59:18 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/13 20:25:55 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int     is_builtins(t_cmd *cmds)
         if (!cmds)
                 return (0);
         tmp = cmds;
-        while (tmp)
+        if (tmp)
         {
                 if (ft_strncmp(tmp->cmd[0], "echo", 4) == 0)
                         return (1);
@@ -35,7 +35,6 @@ int     is_builtins(t_cmd *cmds)
                         return (1);
                 if (ft_strncmp(tmp->cmd[0], "exit", 4) == 0)
                         return (1);
-                tmp = tmp->next;
         }
         return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_process.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 20:49:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 20:53:11 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/18 16:48:18 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,13 @@ int     read_redir(char *red, int input)
         close(fd);
         return (0);
 }
+
 int     heredoc(t_minishell *mini, int input)
 {
-        if (dup2(mini->infile, input) < 0)
+        (void)input;
+        if (dup2(mini->infile, STDIN_FILENO) < 0)
         {
                 perror("dup2");
-                return (-1);
-        }
-        if (close(mini->infile) < 0)
-        {
-                perror("close");
                 return (-1);
         }
         return (0);

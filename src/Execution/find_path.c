@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:20:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 13:59:39 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/14 11:20:53 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,19 @@ char        **find_path(t_minishell *env)
 
 char    *join_cmd_path(t_minishell *mini, char *cmd)
 {
-       char     **path;
-       char     *full_path;
-       struct   stat file;
-
-       path = find_path(mini);
+        char     **path;
+        char     *full_path;
+        struct   stat file;
+        
+        path = find_path(mini);
         if (!path)
-                 return (NULL);
+                return (NULL);
         if (!cmd || !cmd[0])
                 return (NULL);
         if (stat(cmd, &file) == 0 && S_ISDIR(file.st_mode))
         {
-                write(2 , "minishell: ", 11);
-                write(2 , cmd, ft_strlen(cmd));
-                write(2 ," is a directory\n", 16);
-                exit(IS_DIR);
+                (write(2 , "minishell: ", 11), write(2 , cmd, ft_strlen(cmd)));
+                (write(2 ," is a directory\n", 16), exit(IS_DIR));
         }
         if (!access(cmd, F_OK) || !access(cmd, X_OK))
                 return (cmd);
@@ -80,7 +78,7 @@ int     my_execve(t_minishell *mini, t_cmd *cmds)
         {
                 path = find_cmd(mini, cmds->cmd[0]);
                 if (path)
-                {
+                { 
                         execve(path, cmds->cmd, my_env);
                         perror("execve");
                         exit(1);

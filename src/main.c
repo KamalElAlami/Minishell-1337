@@ -6,11 +6,28 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/16 16:22:14 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:49:11 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+ void	close_all(void)
+ {
+	int i;
+
+	i = 3;
+	while (++i < OPEN_MAX)
+		if (close(i) == -1)
+			return;
+ }
+ 
+ void reset_readline_state()
+{
+    rl_replace_line("", 0);
+    rl_on_new_line();
+    rl_redisplay();
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -19,6 +36,7 @@ int	main(int argc, char **argv, char **env)
 	t_env		*envr;
 	t_cmd		*cmds;
 	struct termios original_termios;
+	rl_catch_signals = 0;
 
 	(void)argc;
 	(void)argv;
@@ -34,13 +52,19 @@ int	main(int argc, char **argv, char **env)
 	store_env(env, &envr);
 	minishell->ret_value = 0;	
 	minishell->env = envr;
-	tcgetattr(STDIN_FILENO, &original_termios);
-	set_sigs();
+	tcgetattr(STDIN_FILENO, &original_termios);	set_sigs();
 	while (1)
-	{	
-		minishell->line = readline("\x1b[32mminishell-1.0$\x1b[0m :");
+	{
+		set_sigs();
+		g_exit_stts = 0;
+		minishell->line = readline("\x1b[32mminishell$\x1b[0m :");
 		if (!minishell->line)
 			return (minishell->ret_value);
+		if (g_exit_stts == 1)
+		{
+			minishell->ret_value = 1;
+			continue;
+		}
 		if (!lexer_first(&lexer, minishell->line))
 			continue ;
 		minishell->start = lexer;
@@ -49,12 +73,12 @@ int	main(int argc, char **argv, char **env)
 		if (minishell->line)
 		{
 			add_history(minishell->line);
-			close(minishell->infile);
-			unlink("/tmp/ana_machi_heredoc");
+			close_all();
 			free(minishell->line);
 			clear_token(&lexer, free);
 			clear_cmd(&cmds, free);
 		}
 	}
+	puts("salam");
 	return (minishell->ret_value);
 }
