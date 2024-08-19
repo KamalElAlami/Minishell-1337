@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/14 11:33:38 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/19 18:04:25 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 	remove_quotes(mini->start);
 	if (!check_validation(mini->start, mini))
 		return ;
+	// if (g_exit_stts == 6)
+	// 	mini->ret_value = 1;
 	if (mini->start)
 	{
 		send_to_execution(mini->start, cmds);

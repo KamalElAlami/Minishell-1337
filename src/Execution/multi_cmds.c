@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/18 16:39:52 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/19 17:30:06 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	first_commande(t_minishell *mini, t_cmd *cmd)
 	mini->pipe[0] = (int *)malloc(sizeof(int) * 2);
 	if (pipe(mini->pipe[0]) == -1)
 		return (perror("pipe"), ERROR);
+	reset_sigs();
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
-		reset_sigs();
 		close(mini->pipe[0][0]);
 		process(mini, cmd, STDIN_FILENO, mini->pipe[0][1]);
 	}
@@ -41,12 +41,12 @@ int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 	mini->pipe[i] = (int *)malloc(sizeof(int) * 2);	
 	if (pipe(mini->pipe[i]) == -1)
 		return (perror("pipe"), ERROR);
+	reset_sigs();
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
-		reset_sigs();
 		close(mini->pipe[i][0]);
 		process(mini, cmd, mini->pipe[i - 1][0], mini->pipe[i][1]);
 	}
@@ -64,12 +64,12 @@ int	last_cmd(t_minishell *mini, t_cmd *cmd, int i)
 {
 	pid_t	pid;
 
+	reset_sigs();
 	pid = fork();
 	if (pid == -1)	
 		return (perror("fork"), ERROR);
 	if (!pid)
 	{
-		reset_sigs();
 		process(mini, cmd, mini->pipe[i - 2][0], STDOUT_FILENO);
 	}
 	if (close(mini->pipe[i - 2][0]))

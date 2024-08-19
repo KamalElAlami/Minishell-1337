@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/18 15:58:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:14:15 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int     execute_single_commande(t_minishell *mini, t_cmd *cmd)
                 status = execute_builtin(mini, cmd);
         else
         {
+                reset_sigs();
                 pid = fork();
                 if (pid == -1)
                         return (perror("fork"), 1);
                 if (pid == 0)
                 {
-                        reset_sigs();
                         status = my_execve(mini, cmd);
                 }
                 waitpid(pid, &status, 0);
