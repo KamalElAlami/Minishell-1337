@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/18 16:44:54 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:35:03 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int isvalid(char *arg, int *join_flag)
                                 continue ;
                         }
                 }
-                else if (!ft_isalnum(id[i]) && id[i] != '_')
+                if (!ft_isalnum(id[i]) && id[i] != '_')
                         error = 1;
                 i++;
         }
