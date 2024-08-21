@@ -6,21 +6,21 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/19 20:13:05 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:19:20 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
- void	close_all(void)
- {
-	int i;
+void	close_all(void)
+{
+	int	i;
 
 	i = 3;
 	while (++i < OPEN_MAX)
 		if (close(i) == -1)
-			return;
- }
+			return ;
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -28,7 +28,6 @@ int	main(int argc, char **argv, char **env)
 	t_tokenizer	*lexer;
 	t_env		*envr;
 	t_cmd		*cmds;
-	struct termios original_termios;
 
 	(void)argc;
 	(void)argv;
@@ -42,10 +41,9 @@ int	main(int argc, char **argv, char **env)
 	lexer = NULL;
 	cmds = NULL;
 	store_env(env, &envr);
-	minishell->ret_value = 0;	
+	minishell->ret_value = 0;
 	minishell->env = envr;
 	rl_catch_signals = 0;
-	tcgetattr(STDIN_FILENO, &original_termios);	
 	while (1)
 	{
 		set_sigs();
@@ -67,7 +65,6 @@ int	main(int argc, char **argv, char **env)
 			clear_token(&lexer, free);
 			clear_cmd(&cmds, free);
 		}
-		tcsetattr(STDIN_FILENO, TCSANOW, &original_termios);
 	}
 	return (minishell->ret_value);
 }

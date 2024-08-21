@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/19 18:04:25 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/21 17:37:09 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 {
 	if (token && *token->type == PIPE)
 		return (printf("syntax error near unexpected token `%s'\n", token->token), 0);
-	while (token)
+	while (token && g_exit_stts != 6)
 	{
 		if (token && *token->type != WORD && !token->next)
 			return (printf("syntax error near unexpected token `%s'\n", token->token), 0);
@@ -45,7 +45,7 @@ void	remove_quotes(t_tokenizer *token)
 {
 	t_tokenizer	*tmp;
 	char		*str;
-	int		i;
+	int			i;
 
 	str = NULL;
 	tmp = token;
@@ -78,23 +78,11 @@ void	remove_quotes(t_tokenizer *token)
 	}
 }
 
-void print_commande(t_cmd *cmds)
-{
-	for (t_cmd *head = cmds; head; head = head->next)
-	{
-		for (int i = 0; head->cmd[i]; i++)
-			printf("cmd[%d]: %s\n", i, head->cmd[i]);
-		printf("------------\n");
-	}
-}
-
 void	parse_input(t_minishell *mini, t_cmd **cmds)
 {
 	remove_quotes(mini->start);
 	if (!check_validation(mini->start, mini))
 		return ;
-	// if (g_exit_stts == 6)
-	// 	mini->ret_value = 1;
 	if (mini->start)
 	{
 		send_to_execution(mini->start, cmds);

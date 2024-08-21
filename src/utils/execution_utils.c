@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:54:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/29 17:06:18 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:23:34 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 int	node_len(t_cmd *cmds)
 {
 	int		length;
-        t_cmd            *tmp;
+	t_cmd	*tmp;
 
 	if (!cmds)
 		return (0);
 	length = 0;
-        tmp = cmds;
+	tmp = cmds;
 	while (tmp)
 	{
-                length++;
+		length++;
 		tmp = tmp->next;
 	}
 	return (length);

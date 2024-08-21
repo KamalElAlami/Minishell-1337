@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/18 17:00:23 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/08/21 18:14:00 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_signal				t_signal;
 typedef struct s_env				t_env;
 typedef struct s_cmd				t_cmd;
 typedef struct s_expansion			t_expantion;
-typedef struct s_propre			t_propre;
+typedef struct s_propre				t_propre;
 typedef enum e_lexer				t_lexer;
 typedef enum e_stat					t_stat;
 
@@ -45,14 +45,14 @@ struct s_tokenizer
 
 struct s_cmd
 {
-	char		**cmd;
-	char		**red;
+	char			**cmd;
+	char			**red;
 	struct s_cmd	*next;
 };
 
 struct s_propre
 {
-	char		*str;
+	char			*str;
 	struct s_propre	*next;
 };
 
@@ -65,7 +65,7 @@ struct s_minishell
 	t_env			*secret_env;
 	t_cmd			*cmd;
 	char			*line;
-	int			**pipe;
+	int				**pipe;
 	int				infile;
 	int				fdin;
 	int				fdout;
@@ -84,9 +84,9 @@ struct	s_signal
 
 struct s_env
 {
-	char	*key;
-	char	*value;
-	struct s_env *next;
+	char			*key;
+	char			*value;
+	struct s_env	*next;
 };
 
 enum	e_lexer
@@ -96,7 +96,7 @@ enum	e_lexer
 	GREATGREAT, // >>
 	LESSLESS, // <<
 	PIPE, // |
-	WORD, 
+	WORD,
 	WHITESPACE, // ' '
 	D_QUOTE, // ""
 	QUOTE, // ''

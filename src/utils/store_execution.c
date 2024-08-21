@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   store_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/07/19 21:16:09 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:26:55 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void append_to_exec(t_cmd **cmds, t_cmd *cmd)
+void	append_to_exec(t_cmd **cmds, t_cmd *cmd)
 {
-    t_cmd *head;
+	t_cmd	*head;
 
-    if (!cmds || !cmd)
-        return;
-    if (!*cmds)
-    {
-        *cmds = cmd;
-        return;
-    }
-    head = *cmds;
-    while (head->next)
-        head = head->next;
-    head->next = cmd;
+	if (!cmds || !cmd)
+		return ;
+	if (!*cmds)
+	{
+		*cmds = cmd;
+		return ;
+	}
+	head = *cmds;
+	while (head->next)
+		head = head->next;
+	head->next = cmd;
 }
 
 t_cmd	*new_cmd(int cmd, int red)

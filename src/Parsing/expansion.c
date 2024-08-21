@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:23:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 19:19:48 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:31:34 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	*expansion(char *token, t_minishell *mini)
 {
 	char	*join_it;
 	char	*str;
-	int	i;
-	int	j;
-	int	count;
-	
+	int		i;
+	int		j;
+	int		count;
+
 	i = 0;
 	str = NULL;
 	join_it = NULL;
@@ -57,7 +57,8 @@ char	*expansion(char *token, t_minishell *mini)
 			{
 				i++;
 				j = i;
-				while (ft_isalnum(token[i]) || token[i] == '_' || ft_isalpha(token[i]))
+				while (ft_isalnum(token[i]) || token[i] == '_'
+					|| ft_isalpha(token[i]))
 					i++;
 				str = get_value(&mini, ft_substr(token, j, i));
 				join_it = ft_strjoin(join_it, str);

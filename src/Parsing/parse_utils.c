@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/07 20:42:50 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/08/21 17:36:19 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	is_special(int c)
 		c == '"' || c == '\'');
 }
 
-void send_to_execution(t_tokenizer *token, t_cmd **cmd)
+void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 {
-	t_cmd	*new;
-	int	i;
-	int	j;
+	t_cmd		*new;
+	int			i;
+	int			j;
 	t_tokenizer	*tmp;
-	int	count_red;
-	int	count_cmd;
+	int			count_red;
+	int			count_cmd;
 
 	tmp = token;
 	while (tmp)
