@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/21 17:40:43 by kael-ala         ###   ########.fr       */
+/*   Created: 2024/09/04 00:50:41 by kael-ala          #+#    #+#             */
+/*   Updated: 2024/09/04 00:50:43 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	single_process(t_minishell *mini, t_cmd *cmds)
 	if (red_process(mini, cmds, STDIN_FILENO, STDOUT_FILENO) == -1)
 		return (1);
 	status = execute_single_commande(mini, cmds);
+	if (status == 1)
+		exit(2);
 	dup2(mini->fdin, STDIN_FILENO);
 	dup2(mini->fdout, STDOUT_FILENO);
 	close(mini->fdin);

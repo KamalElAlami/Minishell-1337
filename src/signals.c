@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 16:28:58 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/08/21 17:22:36 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/03 23:26:39 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	handle_sigint_child(int sig)
 	if (sig == SIGINT)
 	{
 		g_exit_stts = 1;
-		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 	}

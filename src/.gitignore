@@ -1,6 +1,0 @@
-*.out
-minishell
-*/*.o
-*/*.a
-Info.plist
-minishell_db

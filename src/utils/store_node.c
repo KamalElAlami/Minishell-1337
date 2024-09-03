@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/05/26 17:50:33 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/03 15:22:59 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,19 @@ void	append_token(t_tokenizer **tokens, t_tokenizer *token)
 	head->next = token;
 }
 
-t_tokenizer	*new_token(void *content, t_lexer *type, t_stat *stat)
+t_tokenizer	*new_token(void *content, t_lexer *type, \
+	t_stat *stat, bool joinable)
 {
 	t_tokenizer	*head;
 
-	head = (t_tokenizer *)malloc(sizeof(t_tokenizer));
+	head = o_malloc(sizeof(t_tokenizer));
 	if (!head)
 		return (NULL);
 	head->token = content;
 	head->type = type;
 	head->stat = stat;
 	head->len = ft_strlen((char *)content);
+	head->joinable = joinable;
 	head->prev = NULL;
 	head->next = NULL;
 	return (head);

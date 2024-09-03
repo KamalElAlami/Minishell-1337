@@ -1,4 +1,21 @@
-kayn wa7eed l unused input f heredoc func in Execution/red_process.c:71:40:
+test 1
+export a="salam"
+export a
+error : value reset
 
 
- export c#+salam
+
+test 2
+sorti export
+
+test3
+handli ./minishell + ctrl \ done
+
+handli top + cntl \ done
+
+7yad leaks ra drt garbege collector w changit malloc bl function jdida khask ghi t appendi les addres li allociiti l dik l function smitha mr_propre bach n freeyiw kolchi fach nsaliw
+
+ay 7aja khra atl9aha mamsaybach mzn ana an9adha
+
+test 4
+export ""
