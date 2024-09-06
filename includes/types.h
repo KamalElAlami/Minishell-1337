@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 16:29:58 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/06 15:03:44 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct s_cmd				t_cmd;
 typedef struct s_expansion			t_expantion;
 typedef enum e_lexer				t_lexer;
 typedef enum e_stat					t_stat;
+
+typedef struct s_propre
+{
+	void			*addr;
+	struct s_propre	*next;
+}				t_propre;
 
 struct s_tokenizer
 {

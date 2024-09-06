@@ -6,16 +6,11 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/06 14:51:43 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:06:22 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void clean(void)
-{
-	system("leaks minishell");
-}
 
 void	close_all(void)
 {
