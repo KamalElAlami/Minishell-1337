@@ -9,9 +9,9 @@ test 2
 sorti export
 
 test3
-handli ./minishell + ctrl \ done
+handli ./minishell + ctrl \
 
-handli top + cntl \ done
+handli top + cntl \
 
 7yad leaks ra drt garbege collector w changit malloc bl function jdida khask ghi t appendi les addres li allociiti l dik l function smitha mr_propre bach n freeyiw kolchi fach nsaliw
 

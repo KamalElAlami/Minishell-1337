@@ -6,11 +6,16 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 23:52:45 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/06 14:51:43 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void clean(void)
+{
+	system("leaks minishell");
+}
 
 void	close_all(void)
 {
@@ -44,7 +49,7 @@ static void	init_minishell(t_minishell **minishell, t_env **envr, \
 		hardcode_env(envr);
 	(*minishell)->ret_value = 0;
 	(*minishell)->env = *envr;
-	// rl_catch_signals = 0;
+	rl_catch_signals = 0;
 }
 
 static void	process_line(t_minishell *minishell, \
@@ -63,13 +68,13 @@ static void	process_line(t_minishell *minishell, \
 		clear_cmd(cmds, free);
 	}
 }
+
 int	main(int argc, char **argv, char **env)
 {
-	t_minishell		*minishell;
-	t_env			*envr;
-	t_tokenizer		*lexer;
-	t_cmd			*cmds;
-	struct termios	old;
+	t_minishell	*minishell;
+	t_env		*envr;
+	t_tokenizer	*lexer;
+	t_cmd		*cmds;
 
 	(void)argc;
 	(void)argv;
@@ -77,19 +82,17 @@ int	main(int argc, char **argv, char **env)
 		return (ft_putstr_fd("minishell only reads from tty\n", 2), 1);
 	minishell = o_malloc(sizeof(t_minishell));
 	minishell->envirement = env;
-	tcgetattr(STDIN_FILENO, &old);
 	init_minishell(&minishell, &envr, &lexer, &cmds);
 	while (1)
 	{
 		set_sigs();
 		g_exit_stts = 0;
-		minishell->line = readline("minishell$ : ");
+		minishell->line = readline("\x1b[32mminishell$\x1b[0m : ");
 		if (!minishell->line)
 			return (minishell->ret_value);
 		if (g_exit_stts == 1)
 			minishell->ret_value = 1;
 		process_line(minishell, &lexer, &cmds);
-		tcsetattr(STDIN_FILENO, TCSANOW, &old);
 	}
 	return (minishell->ret_value);
 }

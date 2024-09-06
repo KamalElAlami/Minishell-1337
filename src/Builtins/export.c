@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/03 23:55:02 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/06 13:38:10 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	add_value(char *id, char *value, t_env **env, int flag)
 	{
 		if (ft_strcmp(tmp->key, id) == 0 && !flag)
 		{
-			tmp->value = value;
+			if (value)
+				tmp->value = value;
 			found = 1;
 		}
 		else if (ft_strcmp(tmp->key, id) == 0 && flag)
