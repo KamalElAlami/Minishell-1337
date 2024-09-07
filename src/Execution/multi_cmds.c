@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   multi_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:56:11 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/06 13:18:53 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:42:00 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	other_cmds(t_minishell *mini, t_cmd *cmd, int i)
 	mini->pipe[i] = o_malloc(sizeof(int) * 2);
 	if (pipe(mini->pipe[i]) == -1)
 		return (perror("pipe"), ERROR);
-	signal(SIGINT, SIG_IGN);
+	reset_sigs();
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), ERROR);
@@ -64,7 +64,7 @@ int	last_cmd(t_minishell *mini, t_cmd *cmd, int i)
 {
 	pid_t	pid;
 
-	signal(SIGINT, SIG_IGN);
+	reset_sigs();
 	pid = fork();
 	if (pid == -1)
 		return (perror("fork"), ERROR);

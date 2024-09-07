@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/06 15:06:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/03 16:02:28 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		set_sigs();
 		g_exit_stts = 0;
-		minishell->line = readline("\x1b[32mminishell$\x1b[0m : ");
+		minishell->line = readline("minishell$ : ");
 		if (!minishell->line)
 			return (minishell->ret_value);
 		if (g_exit_stts == 1)

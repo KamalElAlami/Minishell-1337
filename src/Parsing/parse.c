@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:22:02 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/07 19:47:20 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 		if (*token->type != WORD)
 		{
 			if (token->next)
-				if (*token->next->type == PIPE || *token->next->type != WORD)
+				if (*token->next->type == PIPE)
 					return (printf("syntax error near unexpected token `%s'\n", \
 						token->token), 258);
 		}
@@ -76,7 +76,16 @@ void	join_tokens(t_tokenizer *token)
 	{
 		if (tmp->joinable == 1)
 		{
-			tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+			if (*tmp->stat == INDQUOTES)
+			{
+				*tmp->stat = INDQUOTES;
+				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+			}
+			else if (*tmp->stat == INQUOTES)
+			{
+				*tmp->stat = INQUOTES;
+				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+			}
 			tmp->next = tmp->next->next;
 		}
 		tmp = tmp->next;
@@ -91,6 +100,11 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 	if (checker == 258)
 	{
 		mini->ret_value = 258;
+		return ;
+	}
+	if (checker == -1)
+	{
+		mini->ret_value = 1;
 		return ;
 	}
 	remove_quotes(mini->start);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/06 15:03:44 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:20:13 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,27 @@ typedef struct s_tokenizer			t_tokenizer;
 typedef struct s_env				t_env;
 typedef struct s_cmd				t_cmd;
 typedef struct s_expansion			t_expantion;
-typedef enum e_lexer				t_lexer;
-typedef enum e_stat					t_stat;
 
-typedef struct s_propre
+typedef enum e_lexer
 {
-	void			*addr;
-	struct s_propre	*next;
-}				t_propre;
+	GREAT,
+	LESS,
+	GREATGREAT,
+	LESSLESS,
+	PIPE,
+	WORD,
+	WHITESPACE,
+	D_QUOTE,
+	QUOTE,
+	WILDCARD
+}	t_lexer;
+
+typedef enum e_stat
+{
+	GENERAL,
+	INDQUOTES,
+	INQUOTES,
+}	t_stat;
 
 struct s_tokenizer
 {
@@ -84,23 +97,3 @@ struct s_env
 	struct s_env	*next;
 };
 
-enum	e_lexer
-{
-	GREAT,
-	LESS,
-	GREATGREAT,
-	LESSLESS,
-	PIPE,
-	WORD,
-	WHITESPACE,
-	D_QUOTE,
-	QUOTE,
-	WILDCARD
-} ;
-
-enum	e_stat
-{
-	GENERAL,
-	INDQUOTES,
-	INQUOTES,
-};
