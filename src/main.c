@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 16:02:28 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/10 01:08:05 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+void leakss(void)
+{
+	system("leaks minishell");
+}
 
 void	close_all(void)
 {
@@ -57,25 +61,25 @@ static void	process_line(t_minishell *minishell, \
 	if (minishell->line)
 	{
 		add_history(minishell->line);
+		safe_clean(minishell, cmds, lexer);
 		close_all();
-		free(minishell->line);
-		clear_token(lexer, free);
-		clear_cmd(cmds, free);
 	}
 }
 
 int	main(int argc, char **argv, char **env)
 {
+	atexit(leakss);
 	t_minishell	*minishell;
 	t_env		*envr;
 	t_tokenizer	*lexer;
 	t_cmd		*cmds;
+	int			status;
 
 	(void)argc;
 	(void)argv;
 	if (isatty(0) == 0)
 		return (ft_putstr_fd("minishell only reads from tty\n", 2), 1);
-	minishell = o_malloc(sizeof(t_minishell));
+	minishell = o_malloc(sizeof(t_minishell), 0);
 	minishell->envirement = env;
 	init_minishell(&minishell, &envr, &lexer, &cmds);
 	while (1)
@@ -84,10 +88,17 @@ int	main(int argc, char **argv, char **env)
 		g_exit_stts = 0;
 		minishell->line = readline("minishell$ : ");
 		if (!minishell->line)
-			return (minishell->ret_value);
+		{
+			ft_putstr_fd("exit\n", 2);
+			break ;
+		}
 		if (g_exit_stts == 1)
 			minishell->ret_value = 1;
 		process_line(minishell, &lexer, &cmds);
 	}
-	return (minishell->ret_value);
+	status = minishell->ret_value;
+	o_malloc(0, 1);
+	clear_history();
+	clear_env(&envr, free);
+	return (status);
 }

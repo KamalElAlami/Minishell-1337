@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+         #
+#    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 00:47:15 by omghazi           #+#    #+#              #
-#    Updated: 2024/08/26 16:03:01 by omghazi          ###   ########.fr        #
+#    Updated: 2024/09/09 23:55:51 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,7 @@ SRC = ft_memset.c		\
 		ft_putstr_fd.c		\
 		ft_putnbr_fd.c		\
 		ft_putendl_fd.c		\
-		mr_propre.c	\
-		create_leaks_list.c	\
+		tax_collector.c \
 
 SBONUS = ft_lstnew_bonus.c		\
 	 	 ft_lstadd_front_bonus.c	\

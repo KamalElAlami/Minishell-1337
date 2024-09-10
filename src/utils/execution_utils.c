@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:54:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 15:22:55 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/08 22:22:18 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*env_join(char const *s1, char const *s2)
 		l1 = ft_strlen(s1);
 	if (s2)
 		l2 = 1 + ft_strlen(s2);
-	res = o_malloc((l1 + l2 + 1) * sizeof(char));
+	res = o_malloc((l1 + l2 + 1) * sizeof(char), 0);
 	if (!res)
 		return (NULL);
 	return (fill_envs(s1, s2, &res));
@@ -98,7 +98,7 @@ char	**env_to_array(t_env *env_list)
 	if (!env_list)
 		return (NULL);
 	size = envname_size(env_list);
-	env = o_malloc(sizeof(char *) * (size + 1));
+	env = o_malloc(sizeof(char *) * (size + 1), 0);
 	if (!env)
 		return (NULL);
 	i = 0;

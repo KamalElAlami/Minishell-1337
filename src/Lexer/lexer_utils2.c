@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/07 18:01:30 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/10 01:18:24 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 	bool		joinable;
 
 	j = 0;
-	stat = o_malloc(sizeof(t_stat));
+	stat = o_malloc(sizeof(t_stat), 0);
 	*stat = GENERAL;
 	joinable = false;
 	while (input[*i] && !check_word_input(input[*i]))
@@ -95,7 +95,7 @@ t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i)
 
 	node = NULL;
 	j = *i;
-	stat = o_malloc(sizeof(t_stat));
+	stat = o_malloc(sizeof(t_stat), 0);
 	if (input[*i] && input[*i] == '|')
 		node = make_node(input, i, &type[1], stat);
 	else if (input[*i] && input[*i] == '"')

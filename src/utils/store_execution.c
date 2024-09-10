@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 16:30:40 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/10 01:18:52 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_cmd	*new_cmd(int cmd, int red, t_stat *stat, int len)
 {
 	t_cmd	*new;
 
-	new = o_malloc(sizeof(t_cmd));
-	new->cmd = o_malloc(sizeof(char *) * (cmd + 1));
-	new->red = o_malloc(sizeof(char *) * (red + 1));
+	new = malloc(sizeof(t_cmd));
+	new->cmd = malloc(sizeof(char *) * (cmd + 1));
+	new->red = malloc(sizeof(char *) * (red + 1));
 	new->cmd[cmd] = NULL;
 	new->red[red] = NULL;
 	new->stat = malloc(sizeof(t_stat));
@@ -45,16 +45,16 @@ t_cmd	*new_cmd(int cmd, int red, t_stat *stat, int len)
 	return (new);
 }
 
-void	del_one_cmd(t_cmd *cmds, void (*del)(void *))
+void	del_one_cmd(t_cmd *cmds)
 {
 	if (!cmds)
 		return ;
-	del(cmds->red);
-	del(cmds->cmd);
-	free(cmds);
+	free_array(cmds->red);
+	free_array(cmds->cmd);
+	// free(cmds->stat);
 }
 
-void	clear_cmd(t_cmd **cmd, void (*del)(void *))
+void	clear_cmd(t_cmd **cmd)
 {
 	t_cmd	*tmp;
 
@@ -63,7 +63,7 @@ void	clear_cmd(t_cmd **cmd, void (*del)(void *))
 	while (*cmd)
 	{
 		tmp = (*cmd)->next;
-		del_one_cmd(*cmd, del);
+		del_one_cmd(*cmd);
 		*cmd = tmp;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:43:06 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/10 01:06:34 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int			unset(t_cmd *token, t_env **env);
 void		send_to_execution(t_tokenizer *token, t_cmd **cmd);
 void		count_len(t_tokenizer *lst, int *commands_len, \
 				int *redirection_len);
-void		clear_cmd(t_cmd **cmd, void (*del)(void *));
-void		del_one_cmd(t_cmd *cmds, void (*del)(void *));
+void		clear_cmd(t_cmd **cmd);
+void		del_one_cmd(t_cmd *cmds);
 t_cmd		*new_cmd(int cmd, int red, t_stat *stat, int len);
 void		append_to_exec(t_cmd **cmds, t_cmd *cmd);
 int			between_pipe(t_tokenizer *lst);
@@ -113,9 +113,13 @@ void		parse_input(t_minishell *mini, t_cmd **cmds);
 void		append_token(t_tokenizer **tokens, t_tokenizer *token);
 int			ft_isspace(char c);
 int			is_special(int c);
+void		free_array(char **array);
+void		safe_clean(t_minishell *mini, t_cmd **cmds, t_tokenizer **lexer);
+void		clear_env(t_env **env, void (*del)(void *));
 
 /* SIGNALS */
 void		handle_sigint(int sig);
 void		set_sigs(void);
 int			getexstatus(int stts);
 void		reset_sigs(void);
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:08:42 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/06 09:49:55 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/08 22:26:18 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@
 # include <stdio.h>
 # include <limits.h>
 
-typedef struct s_propre				t_propre;
+typedef struct s_collector
+{
+	void				*ptr;
+	struct s_collector	*next;
+}	t_collector;
+
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
-struct s_propre
-{
-	void		*addr;
-	t_propre	*next;
-};
 
 int			ft_atoi(const char *str);
 int			ft_isalpha(int c);
@@ -61,7 +60,6 @@ void		*ft_memcpy(void *dst, const void *src, size_t n);
 void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_calloc(size_t count, size_t size);
 void		*ft_memchr(void *s, int c, size_t n);
-void		*o_malloc(size_t size);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 void		ft_putchar_fd(char c, int fd);
@@ -73,14 +71,13 @@ void		ft_lstadd_back(t_list **lst, t_list *new);
 void		ft_lstdelone(t_list *lst, void (*del)(void*));
 void		ft_lstclear(t_list **lst, void (*del)(void*));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
-void		append_address(t_propre **head, void *addr);
-void		mr_propre(t_propre *prop);
 size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *s);
 t_list		*ft_lstnew(void *content);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-t_propre	*create_addr(void *addr);
+
+void 		*o_malloc(size_t size, int flag);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 05:59:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 15:22:51 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/09 23:21:35 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ int	fill_token_list(char *input, \
 			node = token_word(input, type, &i);
 		else if (input[i] && is_special(input[i]))
 			node = token_special_char(input, type, &i);
-		if (!node)
-			return (clear_token(token, free), 0);
 		append_token(token, node);
 	}
 	return (1);
@@ -50,7 +48,7 @@ int	lexer_first(t_tokenizer **token, char *input)
 	t_lexer		*type;
 
 	node = NULL;
-	type = o_malloc(sizeof(t_lexer) * 11);
+	type = o_malloc(sizeof(t_lexer) * 11, 0);
 	type[0] = WORD;
 	type[1] = PIPE;
 	type[3] = WHITESPACE;

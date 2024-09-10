@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:54:39 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/09 22:51:48 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_split_len(char **s)
 	i = 0;
 	while (s && s[i])
 		i++;
+	free_array(s);
 	return (i);
 }
 
@@ -42,6 +43,7 @@ void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
 		s = ft_split(tmp->token, ' ');
 		while (s && s[j])
 			new->cmd[(*i)++] = ft_strdup(s[j++]);
+		free_array(s);
 	}
 	else
 		new->cmd[(*i)++] = ft_strdup(tmp->token);

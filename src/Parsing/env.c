@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:45:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/29 16:51:09 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/09 22:47:46 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*new_env(char *key, char *value)
 {
 	t_env	*head;
 
-	head = o_malloc(sizeof(t_env));
+	head = malloc(sizeof(t_env));
 	if (value)
 		head->value = ft_strdup(value);
 	else
@@ -88,7 +88,7 @@ int	store_env(char **envr, t_env **env)
 		if (!node)
 			return (0);
 		append_env(env, node);
-		free(each_env);
+		free_array(each_env);
 		i++;
 	}
 	return (1);

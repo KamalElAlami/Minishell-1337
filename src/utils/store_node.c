@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/03 15:22:59 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/09 22:56:11 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_tokenizer	*new_token(void *content, t_lexer *type, \
 {
 	t_tokenizer	*head;
 
-	head = o_malloc(sizeof(t_tokenizer));
+	head = malloc(sizeof(t_tokenizer));
 	if (!head)
 		return (NULL);
 	head->token = content;
@@ -44,6 +44,7 @@ t_tokenizer	*new_token(void *content, t_lexer *type, \
 	head->joinable = joinable;
 	head->prev = NULL;
 	head->next = NULL;
+	// free(content);
 	return (head);
 }
 

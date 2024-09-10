@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:20:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/05 19:58:56 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/09 23:40:09 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ char	*join_cmd_path(t_minishell *mini, char *cmd)
 	{
 		cmd = ft_strjoin(path[i], full_path);
 		if (!access(cmd, X_OK))
-			return (cmd);
+			return (free_array(path), free(full_path), cmd);
+		free(cmd);
 	}
-	return (NULL);
+	return (free_array(path), free(full_path), NULL);
 }
 
 char	*find_cmd(t_minishell *mini, char *cmd)
