@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:23:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 16:13:05 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/10 23:28:03 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ static void	process_dollar_var(char *token, int *i, \
 		while (ft_isalnum(token[*i]) || token[*i] == '_'\
 			|| ft_isalpha(token[*i]))
 			(*i)++;
-		str = get_value(mini, ft_substr(token, j, *i));
+		str = get_value(mini, ft_gsubstr(token, j, *i));
 		*join_it = ft_strjoin(*join_it, str);
+		free(str);
+		free(token);
 	}
 }
 
@@ -62,6 +64,8 @@ static void	process_non_dollar(char *token, int *i, char **join_it)
 		(*i)++;
 	str = ft_substr(token, j, *i);
 	*join_it = ft_strjoin(*join_it, str);
+	free(str);
+	free(token);
 }
 
 char	*expansion(char *token, t_minishell *mini)
@@ -79,6 +83,7 @@ char	*expansion(char *token, t_minishell *mini)
 			process_non_dollar(token, &i, &join_it);
 	}
 	if (join_it)
-		token = ft_strdup(join_it);
+		token = ft_gstrdup(join_it);
+	free(join_it);
 	return (token);
 }

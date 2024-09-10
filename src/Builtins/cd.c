@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/09 20:45:10 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:23:31 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,21 @@ static void	handle_chdir_error(char *path)
 		ft_putstr_fd("Minishell : cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putendl_fd(" Permission denied ", 2);
+		free(path);
 	}
 	else
 	{
 		ft_putstr_fd("Minishell : cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putendl_fd(" No such file or directory ", 2);
+		free(path);
 	}
 }
 
 static void	update_pwd_env(char *oldpwd, char *pwd, t_env **env)
 {
 	if (!set_env(env, "OLDPWD", oldpwd))
-		append_env(env, new_env("OLDPWD", ft_strdup("")));
+		append_env(env, new_env("OLDPWD", ft_gstrdup("")));
 	if (!set_env(env, "PWD", pwd))
 		append_env(env, new_env("PWD", pwd));
 	free(oldpwd);
@@ -81,7 +83,7 @@ int	cd(t_cmd *cmd, t_env *env)
 	{
 		path = get_values(&env, "HOME");
 		if (chdir(path) == -1)
-			return (handle_chdir_error(path), 1);
+			return (free(oldpwd), handle_chdir_error(path), 1);
 	}
 	else
 	{
@@ -89,10 +91,11 @@ int	cd(t_cmd *cmd, t_env *env)
 		if (chdir(path) == -1)
 		{
 			handle_chdir_error(path);
-			return (1);
+			return (free(oldpwd), 1);
 		}
 	}
 	pwd = getcwd(NULL, 0);
 	update_pwd_env(oldpwd, pwd, &env);
+	free(path);
 	return (0);
 }

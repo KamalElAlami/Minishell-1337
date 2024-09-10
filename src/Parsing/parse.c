@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 01:07:19 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:09:36 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	join_tokens(t_tokenizer *token)
 
 void	parse_input(t_minishell *mini, t_cmd **cmds)
 {
+	// (void)cmds;
 	int	checker;
 
 	checker = check_validation(mini->start, mini);

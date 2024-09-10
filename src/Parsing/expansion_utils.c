@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:44:10 by omghazi           #+#    #+#             */
-/*   Updated: 2024/08/31 16:12:47 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/10 15:28:53 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_value(t_minishell **mini, char *key)
 	t_env	*envr;
 
 	if (!key)
-		return (ft_strdup(""));
+		return (ft_gstrdup(""));
 	envr = (*mini)->env;
 	while (envr)
 	{
@@ -25,7 +25,7 @@ char	*get_value(t_minishell **mini, char *key)
 			return (envr->value);
 		envr = envr->next;
 	}
-	return (ft_strdup(""));
+	return (ft_gstrdup(""));
 }
 
 void	process_dollar_question(char *token, int *i, \
@@ -38,5 +38,6 @@ void	process_dollar_question(char *token, int *i, \
 		str = ft_itoa(mini->ret_value);
 		*join_it = ft_strjoin(*join_it, str);
 		(*i)++;
+		free(str);
 	}
 }

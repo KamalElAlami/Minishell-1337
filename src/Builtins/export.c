@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/07 19:50:30 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/10 17:30:05 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,14 @@ int	export(t_cmd *cmd, t_env **env)
 				add_value(id, value, env, flag);
 			}
 			else
+			{
+				free(id);
+				free(value);
 				printf("export: %s: not a valid identifier\n", cmd->cmd[i]);
+			}
 			i++;
 		}
+		free(id), free(value);
 	}
 	return (0);
 }

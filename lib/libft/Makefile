@@ -6,7 +6,7 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 00:47:15 by omghazi           #+#    #+#              #
-#    Updated: 2024/09/09 23:55:51 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/09/10 15:12:16 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,9 @@ SRC = ft_memset.c		\
 		ft_putnbr_fd.c		\
 		ft_putendl_fd.c		\
 		tax_collector.c \
+		ft_gsplit.c \
+		ft_gstrdup.c \
+		ft_gsubstr.c \
 
 SBONUS = ft_lstnew_bonus.c		\
 	 	 ft_lstadd_front_bonus.c	\

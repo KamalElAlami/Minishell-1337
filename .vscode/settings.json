@@ -17,7 +17,8 @@
         "memory": "c",
         "ratio": "c",
         "tuple": "c",
-        "utility": "c"
+        "utility": "c",
+        "__functional_03": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

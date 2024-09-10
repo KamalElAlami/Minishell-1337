@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:08:42 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/08 22:26:18 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:30:55 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,8 @@ t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 void 		*o_malloc(size_t size, int flag);
+char		*ft_gstrdup(const char *s1);
+char		**ft_gsplit(char const *s, char c);
+char		*ft_gsubstr(char const *s, unsigned int start, size_t len);
 
 #endif
