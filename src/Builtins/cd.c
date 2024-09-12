@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 17:23:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/12 22:08:37 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_env(t_env **env, char *key, char *value)
 		if (!ft_strcmp(tmp->key, key))
 		{
 			if (value)
-				tmp->value = ft_strdup(value);
+				tmp->value = ft_gstrdup(value);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -51,14 +51,12 @@ static void	handle_chdir_error(char *path)
 		ft_putstr_fd("Minishell : cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putendl_fd(" Permission denied ", 2);
-		free(path);
 	}
 	else
 	{
 		ft_putstr_fd("Minishell : cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putendl_fd(" No such file or directory ", 2);
-		free(path);
 	}
 }
 
@@ -96,6 +94,5 @@ int	cd(t_cmd *cmd, t_env *env)
 	}
 	pwd = getcwd(NULL, 0);
 	update_pwd_env(oldpwd, pwd, &env);
-	free(path);
 	return (0);
 }

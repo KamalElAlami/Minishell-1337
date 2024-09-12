@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:23:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 23:28:03 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/11 20:45:07 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	process_dollar_var(char *token, int *i, \
 			(*i)++;
 		str = get_value(mini, ft_gsubstr(token, j, *i));
 		*join_it = ft_strjoin(*join_it, str);
-		free(str);
-		free(token);
+		// free(str);
+		// free(token);
 	}
 }
 
@@ -65,7 +65,7 @@ static void	process_non_dollar(char *token, int *i, char **join_it)
 	str = ft_substr(token, j, *i);
 	*join_it = ft_strjoin(*join_it, str);
 	free(str);
-	free(token);
+	// free(token);
 }
 
 char	*expansion(char *token, t_minishell *mini)
@@ -83,7 +83,10 @@ char	*expansion(char *token, t_minishell *mini)
 			process_non_dollar(token, &i, &join_it);
 	}
 	if (join_it)
+	{
+		free(token);
 		token = ft_gstrdup(join_it);
-	free(join_it);
+	}
+	// free(join_it);
 	return (token);
 }

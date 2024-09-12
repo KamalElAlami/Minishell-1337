@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 01:08:05 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/11 20:02:43 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	process_line(t_minishell *minishell, \
 
 int	main(int argc, char **argv, char **env)
 {
-	atexit(leakss);
+	// atexit(leakss);
 	t_minishell	*minishell;
 	t_env		*envr;
 	t_tokenizer	*lexer;

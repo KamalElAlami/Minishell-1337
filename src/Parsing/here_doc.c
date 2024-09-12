@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 23:10:34 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/11 20:43:50 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 			input = expansion(input, mini);
 		write(mini->fdin, input, ft_strlen(input));
 		write(mini->fdin, "\n", 1);
-		free(input);
+		// free(input);
 	}
 }
 

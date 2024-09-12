@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/01 18:49:31 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/11 19:18:28 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	echo(t_cmd *cmd)
 	int		j;
 
 	i = 0;
+	if (!cmd->cmd[1])
+	{
+		ft_putstr_fd("\n", 1);
+		return (0);
+	}
 	args = check_args(cmd->cmd, &i);
 	j = 0;
 	if (args)
