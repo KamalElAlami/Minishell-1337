@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 16:05:26 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/07 17:20:13 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ struct s_tokenizer
 {
 	struct s_tokenizer		*next;
 	struct s_tokenizer		*prev;
-	t_lexer					*types;
 	t_lexer					*type;
 	t_stat					*stat;
 	size_t					len;
@@ -97,3 +96,4 @@ struct s_env
 	char			*value;
 	struct s_env	*next;
 };
+

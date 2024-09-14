@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:15:56 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 15:11:10 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/05 21:15:51 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*sort_wildcard(char *wildcard)
 	int		i;
 	int		j;
 
-	tmp = ft_gsplit(wildcard, ' ');
+	tmp = ft_split(wildcard, ' ');
 	i = 0;
 	while (tmp[i])
 	{

@@ -6,15 +6,11 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/11 20:02:43 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 02:59:22 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-void leakss(void)
-{
-	system("leaks minishell");
-}
 
 void	close_all(void)
 {
@@ -61,19 +57,19 @@ static void	process_line(t_minishell *minishell, \
 	if (minishell->line)
 	{
 		add_history(minishell->line);
-		safe_clean(minishell, cmds, lexer);
 		close_all();
+		safe_clean(minishell, cmds, lexer);
 	}
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	// atexit(leakss);
 	t_minishell	*minishell;
 	t_env		*envr;
 	t_tokenizer	*lexer;
 	t_cmd		*cmds;
-	int			status;
+	int			status;ls
+	
 
 	(void)argc;
 	(void)argv;
@@ -88,10 +84,7 @@ int	main(int argc, char **argv, char **env)
 		g_exit_stts = 0;
 		minishell->line = readline("minishell$ : ");
 		if (!minishell->line)
-		{
-			ft_putstr_fd("exit\n", 2);
-			break ;
-		}
+			return (minishell->ret_value);
 		if (g_exit_stts == 1)
 			minishell->ret_value = 1;
 		process_line(minishell, &lexer, &cmds);

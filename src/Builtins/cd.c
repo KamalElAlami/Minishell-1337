@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/12 22:08:37 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 01:51:56 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	set_env(t_env **env, char *key, char *value)
 		if (!ft_strcmp(tmp->key, key))
 		{
 			if (value)
+			{
+				free(tmp->value);
 				tmp->value = ft_gstrdup(value);
+			}
 			return (1);
 		}
 		tmp = tmp->next;
@@ -77,7 +80,7 @@ int	cd(t_cmd *cmd, t_env *env)
 	char	*pwd;
 
 	oldpwd = getcwd(NULL, 0);
-	if (cmd->cmd[1] == NULL || !ft_strcmp(cmd->cmd[1], "~"))
+	if (cmd->cmd[1] == NULL || (cmd->cmd[1] && !ft_strcmp(cmd->cmd[1], "~")))
 	{
 		path = get_values(&env, "HOME");
 		if (chdir(path) == -1)
@@ -89,7 +92,8 @@ int	cd(t_cmd *cmd, t_env *env)
 		if (chdir(path) == -1)
 		{
 			handle_chdir_error(path);
-			return (free(oldpwd), 1);
+			free(oldpwd);
+			return (1);
 		}
 	}
 	pwd = getcwd(NULL, 0);

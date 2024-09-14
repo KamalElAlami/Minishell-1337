@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/10 17:30:05 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 02:21:29 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void	add_value(char *id, char *value, t_env **env, int flag)
 	{
 		if (ft_strcmp(tmp->key, id) == 0 && !flag)
 		{
-			if (value)
-				tmp->value = value;
+			if (tmp->value)
+				free(tmp->value);
+			tmp->value = value;
 			found = 1;
 		}
 		else if (ft_strcmp(tmp->key, id) == 0 && flag)
 		{
+			if (tmp->value)
+				free(tmp->value);
 			tmp->value = ft_strjoin(tmp->value, value);
 			found = 1;
 		}
@@ -81,16 +84,13 @@ int	export(t_cmd *cmd, t_env **env)
 			{
 				split_var(cmd->cmd[i], &id, &value, flag);
 				add_value(id, value, env, flag);
-			}
-			else
-			{
 				free(id);
 				free(value);
-				printf("export: %s: not a valid identifier\n", cmd->cmd[i]);
 			}
+			else
+				printf("export: %s: not a valid identifier\n", cmd->cmd[i]);
 			i++;
 		}
-		free(id), free(value);
 	}
 	return (0);
 }

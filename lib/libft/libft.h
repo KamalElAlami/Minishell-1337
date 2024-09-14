@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:08:42 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 15:30:55 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 00:52:06 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@
 # include <stdio.h>
 # include <limits.h>
 
-typedef struct s_collector
-{
-	void				*ptr;
-	struct s_collector	*next;
-}	t_collector;
-
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_collector
+{
+	void				*ptr;
+	struct s_collector	*next;
+}	t_collector;
 
 int			ft_atoi(const char *str);
 int			ft_isalpha(int c);
@@ -78,9 +78,9 @@ t_list		*ft_lstnew(void *content);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-void 		*o_malloc(size_t size, int flag);
-char		*ft_gstrdup(const char *s1);
-char		**ft_gsplit(char const *s, char c);
+void		*o_malloc(size_t size, int flag);
 char		*ft_gsubstr(char const *s, unsigned int start, size_t len);
+char		**ft_gsplit(char const *s, char c);
+char		*ft_gstrdup(const char *s1);
 
 #endif

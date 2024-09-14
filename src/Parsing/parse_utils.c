@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 16:07:05 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 00:26:28 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_split_len(char **s)
 	i = 0;
 	while (s && s[i])
 		i++;
-	// free_array(s);
 	return (i);
 }
 
@@ -59,6 +58,19 @@ void	handle_non_word_token(t_tokenizer **tmp, t_cmd *new, int *j)
 	*tmp = (*tmp)->next;
 }
 
+void	print_cmd(t_cmd *cmd)
+{
+	t_cmd *tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		for (int i = 0; tmp->cmd[i]; i++)
+			printf("%s\n", tmp->cmd[i]);
+		tmp = tmp->next;
+	}
+}
+
 void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 {
 	t_cmd		*new;
@@ -74,7 +86,6 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
 			count[0] = ft_split_len(ft_gsplit(tmp->token, ' '));
 		new = new_cmd(count[0], count[1], tmp->stat, ft_strlen(tmp->token));
-		// return ;
 		while (tmp && *tmp->type != PIPE)
 		{
 			if (tmp && *tmp->stat == GENERAL && ft_strlen(tmp->token) == 0)
@@ -92,4 +103,5 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		if (tmp && tmp->next)
 			tmp = tmp->next;
 	}
+	// print_cmd(*cmd);
 }

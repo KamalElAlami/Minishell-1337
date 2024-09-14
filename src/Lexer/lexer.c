@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 05:59:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 16:05:55 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:41:38 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	fill_token_list(char *input, \
 			node = token_word(input, type, &i);
 		else if (input[i] && is_special(input[i]))
 			node = token_special_char(input, type, &i);
+		if (!node)
+			return (clear_token(token, free), 0);
 		append_token(token, node);
 	}
 	return (1);

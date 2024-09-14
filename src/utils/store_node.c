@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/09 22:56:11 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/13 23:43:10 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_tokenizer	*new_token(void *content, t_lexer *type, \
 	head->joinable = joinable;
 	head->prev = NULL;
 	head->next = NULL;
-	// free(content);
 	return (head);
 }
 

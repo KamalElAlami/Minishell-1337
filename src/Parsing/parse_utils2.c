@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 17:05:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 15:22:14 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 02:44:03 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*remove_dquotes(t_tokenizer *tmp, int *i)
 	while (tmp->token[*i])
 	{
 		if (tmp->token[*i] != '"')
-			str = ft_strjoin(str, ft_substr(tmp->token, *i, *i + 1));
+			str = ft_strjoin(str, ft_gsubstr(tmp->token, *i, *i + 1));
 		if (tmp->token[*i])
 			(*i)++;
 	}
@@ -35,7 +35,7 @@ char	*remove_squotes(t_tokenizer *tmp, int *i)
 	while (tmp->token[*i])
 	{
 		if (tmp->token[*i] != '\'')
-			str = ft_strjoin(str, ft_substr(tmp->token, *i, *i + 1));
+			str = ft_strjoin(str, ft_gsubstr(tmp->token, *i, *i + 1));
 		if (tmp->token[*i])
 			(*i)++;
 	}

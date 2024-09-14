@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/10 01:06:34 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:55:29 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
+void safe_clean(t_minishell *mini, t_cmd **cmds, t_tokenizer **lexer);
+void free_array(char **array);
+void	clear_env(t_env **lst, void (*del)(void *));
 int			is_directory(char *cmd);
 int			check_wrong_command(char *cmd);
 int			ft_split_len(char **s);
-t_cmd		*filter_empty_cmd(t_cmd *cmd);
 void		join_tokens(t_tokenizer *token);
 char		*sort_wildcard(char *wildcard);
 char		*ft_wildcard(char *dirname);
@@ -113,13 +115,9 @@ void		parse_input(t_minishell *mini, t_cmd **cmds);
 void		append_token(t_tokenizer **tokens, t_tokenizer *token);
 int			ft_isspace(char c);
 int			is_special(int c);
-void		free_array(char **array);
-void		safe_clean(t_minishell *mini, t_cmd **cmds, t_tokenizer **lexer);
-void		clear_env(t_env **env, void (*del)(void *));
 
 /* SIGNALS */
 void		handle_sigint(int sig);
 void		set_sigs(void);
 int			getexstatus(int stts);
 void		reset_sigs(void);
-

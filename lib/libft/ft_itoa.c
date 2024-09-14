@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:55:50 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/08 22:20:23 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 00:49:53 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*ft_itoa(int n)
 		num = -(long long)n;
 		num_len++;
 	}
-	arr = o_malloc(num_len + 1, 0);
+	arr = malloc(num_len + 1);
 	check_negative(n, arr, &i);
 	insertion(temp, arr, num, &i);
 	return (arr);

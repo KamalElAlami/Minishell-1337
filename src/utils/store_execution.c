@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/11 19:20:09 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/14 00:58:35 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	del_one_cmd(t_cmd *cmds)
 	free_array(cmds->red);
 	free_array(cmds->cmd);
 	free(cmds);
-	// free(cmds->stat);
 }
 
 void	clear_cmd(t_cmd **cmd)

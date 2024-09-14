@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_process.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 19:04:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/09 22:37:10 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/13 12:40:09 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ int	single_process(t_minishell *mini, t_cmd *cmds)
 	mini->fdin = dup(STDIN_FILENO);
 	mini->fdout = dup(STDOUT_FILENO);
 	if (red_process(mini, cmds, STDIN_FILENO, STDOUT_FILENO) == -1)
+	{
+		dup2(mini->fdin, STDIN_FILENO);
+		dup2(mini->fdout, STDOUT_FILENO);
+		close(mini->fdin);
+		close(mini->fdout);
 		return (1);
+	}
 	status = execute_single_commande(mini, cmds);
 	if (status == 3)
 		exit (1);
