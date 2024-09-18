@@ -19,7 +19,8 @@
         "tuple": "c",
         "utility": "c",
         "__functional_03": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "sstream": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 02:59:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/18 01:54:58 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ int	main(int argc, char **argv, char **env)
 	t_env		*envr;
 	t_tokenizer	*lexer;
 	t_cmd		*cmds;
-	int			status;ls
-	
+	int			status;	
 
 	(void)argc;
 	(void)argv;
@@ -83,10 +82,10 @@ int	main(int argc, char **argv, char **env)
 		set_sigs();
 		g_exit_stts = 0;
 		minishell->line = readline("minishell$ : ");
-		if (!minishell->line)
-			return (minishell->ret_value);
 		if (g_exit_stts == 1)
 			minishell->ret_value = 1;
+		if (!minishell->line)
+			return (minishell->ret_value);
 		process_line(minishell, &lexer, &cmds);
 	}
 	status = minishell->ret_value;

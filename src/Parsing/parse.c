@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 02:54:46 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/18 03:35:49 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,30 +43,30 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 
 void	remove_quotes(t_tokenizer *token)
 {
-	(void) token;
-	printf("fff\n");
-	// t_tokenizer	*tmp;
-	// int			i;
-	// char		*str;
+	t_tokenizer	*tmp;
+	int			i;
+	char		*str;
+	char		*old_token;
 
-	// tmp = token;
-	// while (tmp)
-	// {
-	// 	i = 0;
-	// 	if (*tmp->stat == INDQUOTES)
-	// 	{
-	// 		str = remove_dquotes(tmp, &i);
-	// 		if (str)
-	// 			tmp->token = str;
-	// 	}
-	// 	else if (*tmp->stat == INQUOTES)
-	// 	{
-	// 		str = remove_squotes(tmp, &i);
-	// 		if (str)
-	// 			tmp->token = str;
-	// 	}
-	// 	tmp = tmp->next;
-	// }
+	tmp = token;
+	while (tmp)
+	{
+		i = 0;
+		if (*tmp->stat == INDQUOTES || *tmp->stat == INQUOTES)
+		{
+			if (*tmp->stat == INDQUOTES)
+				str = remove_dquotes(tmp, &i);
+			else
+				str = remove_squotes(tmp, &i);
+			if (str)
+			{
+				old_token = tmp->token;
+				tmp->token = str;
+				free(old_token);
+			}
+		}
+		tmp = tmp->next;
+	}
 }
 
 void	join_tokens(t_tokenizer *token)

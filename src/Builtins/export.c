@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/14 02:21:29 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/18 03:25:21 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	add_new_node(char *id, char *value, t_env **env)
 
 	new = new_env(id, value);
 	append_env(env, new);
+	free(id);
+	free(value);
 }
 
 void	add_value(char *id, char *value, t_env **env, int flag)
@@ -50,6 +52,7 @@ void	add_value(char *id, char *value, t_env **env, int flag)
 				free(tmp->value);
 			tmp->value = value;
 			found = 1;
+			free(id);
 		}
 		else if (ft_strcmp(tmp->key, id) == 0 && flag)
 		{
@@ -57,13 +60,14 @@ void	add_value(char *id, char *value, t_env **env, int flag)
 				free(tmp->value);
 			tmp->value = ft_strjoin(tmp->value, value);
 			found = 1;
+			free(id);
+			free(value);
 		}
 		tmp = tmp->next;
 	}
 	if (!found)
 		add_new_node(id, value, env);
 }
-
 int	export(t_cmd *cmd, t_env **env)
 {
 	int		i;
@@ -84,8 +88,6 @@ int	export(t_cmd *cmd, t_env **env)
 			{
 				split_var(cmd->cmd[i], &id, &value, flag);
 				add_value(id, value, env, flag);
-				free(id);
-				free(value);
 			}
 			else
 				printf("export: %s: not a valid identifier\n", cmd->cmd[i]);
