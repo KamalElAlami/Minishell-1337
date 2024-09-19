@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/07 17:00:29 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/19 16:42:58 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	ft_atoi_exit(const char *str)
 	sign = num_sign(&str);
 	while (*str >= '0' && *str <= '9')
 	{
+		flag = 1;
 		res = (res * 10) + (*str - '0');
 		if (res < tmp && sign == 1)
 			return (-1);
@@ -61,15 +62,16 @@ int	check_multi_args(t_cmd *cmd, int *flag)
 	1 && (i = 0);
 	while (cmd->cmd[++i])
 	{
-		1 && (k = 0, j = -1);
+		1 && (k = 0, j = 0);
 		if (i > 1)
 			return (ft_exit_error());
-		while (cmd->cmd[i][++j])
+		while (cmd->cmd[i][j])
 		{
 			if (!is_valid(cmd->cmd[i][j]))
 				return (*flag = 1, 1);
 			if (k++ > 1)
 				return (*flag = 1, 1);
+			j++;
 		}
 	}
 	return (-1);

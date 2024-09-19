@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 23:43:10 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:11:18 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	append_token(t_tokenizer **tokens, t_tokenizer *token)
 	while (head->next)
 		head = head->next;
 	head->next = token;
+	token->prev = head;
 }
 
 t_tokenizer	*new_token(void *content, t_lexer *type, \

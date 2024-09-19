@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 00:26:28 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 15:29:14 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		if (tmp && tmp->next)
 			tmp = tmp->next;
 	}
+	token = NULL;
 	// print_cmd(*cmd);
 }

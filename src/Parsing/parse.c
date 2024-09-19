@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/18 03:35:49 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:35:06 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ int	check_validation(t_tokenizer *token, t_minishell *mini)
 				token->token), 258);
 		if (*token->type == LESSLESS && *token->next->type == WORD)
 			if (!here_doc(token->next, mini))
-				return (0);
-		if (*token->type != WORD)
+		if (*token->type == PIPE && *token->type == PIPE)
+			return (printf("syntax error near unexpected token `%s'\n", \
+				token->token), 258);
+		if (*token->type == LESS || *token->type == GREAT || *token->type == GREATGREAT)
 		{
 			if (token->next)
-				if (*token->next->type == PIPE)
+				if (*token->next->type == LESS || *token->next->type == GREAT || *token->next->type == GREATGREAT)
 					return (printf("syntax error near unexpected token `%s'\n", \
 						token->token), 258);
 		}
@@ -76,22 +78,33 @@ void	join_tokens(t_tokenizer *token)
 	tmp = token;
 	while (tmp)
 	{
-		if (tmp->joinable == 1)
+		if (tmp->joinable == 1 || (tmp->prev && tmp->prev->joinable == 1))
 		{
-			if (*tmp->next->stat == INQUOTES)
+			if (tmp->next && *tmp->next->stat == INQUOTES)
 			{
 				*tmp->stat = INQUOTES;
 				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
 				tmp->next = tmp->next->next;
 			}
-			else if (*tmp->next->stat == INDQUOTES)
+			else if (tmp->next && *tmp->next->stat == INDQUOTES)
 			{
 				*tmp->stat = INDQUOTES;
 				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
 				tmp->next = tmp->next->next;
 			}
+			else
+			{
+					if (tmp->next)
+					{
+						tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+						tmp->next = tmp->next->next;
+					}
+					else
+						tmp = tmp->next;
+			}
 		}
-		tmp = tmp->next;
+		else
+			tmp = tmp->next;
 	}
 }
 
@@ -110,7 +123,6 @@ void	parse_input(t_minishell *mini, t_cmd **cmds)
 		mini->ret_value = 1;
 		return ;
 	}
-	remove_quotes(mini->start);
 	join_tokens(mini->start);
 	if (mini->start)
 	{

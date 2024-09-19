@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 01:31:29 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:08:53 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ void	here_hundle(int sig)
 void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 {
 	char		*input;
+	t_tokenizer	*tmp;
 
 	input = NULL;
+	tmp = delimiter;
+	join_tokens(tmp);
 	while (1)
 	{
 		signal(SIGINT, here_hundle);
