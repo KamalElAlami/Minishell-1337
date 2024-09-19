@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/18 01:54:58 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:45:22 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int	main(int argc, char **argv, char **env)
 	t_cmd		*cmds;
 	int			status;	
 
-	(void)argc;
-	(void)argv;
+	if (argc != 1)
+		return (printf("minishell: %s: No such file or directory\n", argv[1]), 127);
 	if (isatty(0) == 0)
 		return (ft_putstr_fd("minishell only reads from tty\n", 2), 1);
 	minishell = o_malloc(sizeof(t_minishell), 0);
