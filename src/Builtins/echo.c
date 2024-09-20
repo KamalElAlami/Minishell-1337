@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 11:22:45 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/20 15:26:03 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	echo(t_cmd *cmd)
 	int		j;
 
 	i = 0;
+	if (!cmd->cmd[1])
+		return (ft_putendl_fd("", 2), 0);
 	args = check_args(cmd->cmd, &i);
 	j = 0;
 	if (args)
