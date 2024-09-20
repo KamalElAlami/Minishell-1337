@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 11:45:21 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 02:03:53 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:52:09 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*new_env(char *key, char *value)
 {
 	t_env	*head;
 
-	head = malloc(sizeof(t_env));
+	head = o_malloc(sizeof(t_env), 0);
 	if (value)
 		head->value = ft_strdup(value);
 	else
@@ -88,7 +88,6 @@ int	store_env(char **envr, t_env **env)
 		if (!node)
 			return (0);
 		append_env(env, node);
-		free_array(each_env);
 		i++;
 	}
 	return (1);

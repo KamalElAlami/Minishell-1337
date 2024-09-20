@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 19:35:34 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 00:33:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:50:58 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,10 @@ int	my_execve(t_minishell *mini, t_cmd *cmds)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(ft_split(cmds->cmd[0], ' ')[0], 2);
 			ft_putendl_fd(": command not found", 2);
-			free_array(my_env);
-			free(path);
 			exit(UNKNOWN_COMMAND);
 		}
 		execve(path, cmds->cmd, my_env);
 		perror("execve");
-		free_array(my_env);
-		free(path);
 		exit(1);
 	}
 	return (0);

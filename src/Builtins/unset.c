@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:47:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 04:07:57 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:50:46 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ int	unset_first(t_env **env, t_cmd *cmd, int i)
 	if (!ft_strncmp(cmd->cmd[i], tmp->key, ft_strlen(tmp->key)))
 	{
 		*env = tmp->next;
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
 		return (1);
 	}
 	return (0);
@@ -61,9 +58,6 @@ int	unset_env_var(t_env **env, t_cmd *cmd, int i)
 				*env = (*env)->next;
 			else
 				prev->next = tmp->next;
-			free(tmp->key);
-			free(tmp->value);
-			free(tmp);    
 			flag = 1;
 			break ;
 		}

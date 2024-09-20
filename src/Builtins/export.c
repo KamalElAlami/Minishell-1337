@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/18 03:25:21 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:50:31 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	add_new_node(char *id, char *value, t_env **env)
 
 	new = new_env(id, value);
 	append_env(env, new);
-	free(id);
-	free(value);
 }
 
 void	add_value(char *id, char *value, t_env **env, int flag)
@@ -48,20 +46,13 @@ void	add_value(char *id, char *value, t_env **env, int flag)
 	{
 		if (ft_strcmp(tmp->key, id) == 0 && !flag)
 		{
-			if (tmp->value)
-				free(tmp->value);
 			tmp->value = value;
 			found = 1;
-			free(id);
 		}
 		else if (ft_strcmp(tmp->key, id) == 0 && flag)
 		{
-			if (tmp->value)
-				free(tmp->value);
 			tmp->value = ft_strjoin(tmp->value, value);
 			found = 1;
-			free(id);
-			free(value);
 		}
 		tmp = tmp->next;
 	}

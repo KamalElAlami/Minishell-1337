@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 21:20:32 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 00:44:58 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:51:21 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ char	*join_cmd_path(t_minishell *mini, char *cmd)
 	{
 		cmd = ft_strjoin(path[i], full_path);
 		if (!access(cmd, X_OK))
-			return (free_array(path), free(full_path), cmd);
-		free(cmd);
+			return (cmd);
 	}
-	return (free_array(path), free(full_path), NULL);
+	return (NULL);
 }
 
 char	*find_cmd(t_minishell *mini, char *cmd)

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:44:10 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 01:37:55 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:52:46 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,5 @@ void	process_dollar_question(char *token, int *i, \
 		str = ft_itoa(mini->ret_value);
 		*join_it = ft_strjoin(*join_it, str);
 		(*i)++;
-		free(str);
 	}
 }

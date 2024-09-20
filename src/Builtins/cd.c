@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 01:51:56 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:49:13 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ int	set_env(t_env **env, char *key, char *value)
 		if (!ft_strcmp(tmp->key, key))
 		{
 			if (value)
-			{
-				free(tmp->value);
 				tmp->value = ft_gstrdup(value);
-			}
 			return (1);
 		}
 		tmp = tmp->next;

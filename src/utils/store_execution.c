@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 00:58:35 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:48:01 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ t_cmd	*new_cmd(int cmd, int red, t_stat *stat, int len)
 {
 	t_cmd	*new;
 
-	new = malloc(sizeof(t_cmd));
-	new->cmd = malloc(sizeof(char *) * (cmd + 1));
-	new->red = malloc(sizeof(char *) * (red + 1));
+	new = o_malloc(sizeof(t_cmd), 0);
+	new->cmd = o_malloc(sizeof(char *) * (cmd + 1), 0);
+	new->red = o_malloc(sizeof(char *) * (red + 1), 0);
 	new->cmd[cmd] = NULL;
 	new->red[red] = NULL;
 	new->stat = o_malloc(sizeof(t_stat), 0);

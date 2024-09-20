@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 16:45:22 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:58:51 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ static void	process_line(t_minishell *minishell, \
 	parse_input(minishell, cmds);
 	if (minishell->line)
 	{
+		*cmds = NULL;
+		*lexer = NULL;
 		add_history(minishell->line);
+		free(minishell->line);
 		close_all();
-		safe_clean(minishell, cmds, lexer);
 	}
 }
 
