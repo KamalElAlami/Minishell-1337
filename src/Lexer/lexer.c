@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 05:59:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:51:37 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 03:04:31 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	lexer_first(t_tokenizer **token, char *input)
 	t_lexer		*type;
 
 	node = NULL;
-	type = o_malloc(sizeof(t_lexer) * 11, 0);
+	type = o_malloc(sizeof(t_lexer) * 11, END);
 	type[0] = WORD;
 	type[1] = PIPE;
 	type[3] = WHITESPACE;

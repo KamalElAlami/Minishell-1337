@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:20:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 16:05:17 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/21 02:36:44 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_tokenizer	*check_signle_quotes(char *input, int *i, t_lexer *type, \
 		if (input[*i] == '\'')
 		{
 			*stat = INQUOTES;
-			s = ft_substr(input, k, *i);
+			s = ft_freq_substr(input, k, *i);
 			if (!is_special_char(input[*i + 1]) && input[*i + 1] != '\0')
 				flag = true;
 			node = new_token(s, type, stat, flag);
@@ -64,7 +64,7 @@ t_tokenizer	*check_double_quotes(char *input, int *i, t_lexer *type, \
 		if (input[*i] == '"')
 		{
 			*stat = INDQUOTES;
-			s = ft_substr(input, k, *i);
+			s = ft_freq_substr(input, k, *i);
 			if (!is_special_char(input[*i + 1]) && input[*i + 1] != '\0')
 				flag = true;
 			node = new_token(s, type, stat, flag);

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:08:27 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:46:15 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:30:52 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s1)
 	char	*arr;
 	int		i;
 
-	arr = o_malloc(ft_strlen(s1) + 1, 0);
+	arr = o_malloc(ft_strlen(s1) + 1, END);
 	i = 0;
 	while (s1[i])
 	{

@@ -6,7 +6,7 @@
 #    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 00:47:15 by omghazi           #+#    #+#              #
-#    Updated: 2024/09/14 00:51:15 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/09/21 02:59:04 by kael-ala         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC = ft_memset.c		\
 		ft_strtrim.c	\
 		ft_split.c		\
 		ft_gsplit.c		\
+		ft_gstrjoin.c	\
 		ft_itoa.c		\
 		ft_strmapi.c		\
 		ft_striteri.c		\

@@ -6,18 +6,18 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:05:52 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/14 00:15:41 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:49:29 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_gstrdup(const char *s1)
+char	*ft_freq_strdup(const char *s1)
 {
 	char	*arr;
 	int		i;
 
-	arr = o_malloc(ft_strlen(s1) + 1, 0);
+	arr = o_malloc(ft_strlen(s1) + 1, FREQ);
 	i = 0;
 	while (s1[i])
 	{

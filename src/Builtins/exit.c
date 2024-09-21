@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 16:42:58 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/21 03:30:47 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ int	ft_exit(t_cmd *cmd, t_minishell *mini)
 
 	flag = 0;
 	if (!cmd->cmd[1])
-		(ft_putendl_fd("exit", 1), exit(mini->ret_value));
+	{
+		res = mini->ret_value;
+		(o_malloc(0, CLEAR_END), ft_putendl_fd("exit", 1), exit(res));
+	}
 	if (!check_multi_args(cmd, &flag))
 		return (1);
 	if (flag)
@@ -92,13 +95,13 @@ int	ft_exit(t_cmd *cmd, t_minishell *mini)
 		ft_putstr_fd("Minishell : exit: ", 2);
 		ft_putstr_fd(cmd->cmd[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		(ft_putendl_fd("exit", 2), exit(255));
+		(o_malloc(0, CLEAR_END), ft_putendl_fd("exit", 2), exit(255));
 	}
 	res = ft_atoi_exit(cmd->cmd[1]);
 	if (res == INT_MIN)
 		exit(255);
 	if (res == -1)
 		res = 256 + res;
-	(ft_putendl_fd("exit", 1), exit(res));
+	(o_malloc(0, CLEAR_END), ft_putendl_fd("exit", 1), exit(res));
 	return (0);
 }

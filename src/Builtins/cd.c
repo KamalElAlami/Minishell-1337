@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:49:13 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:49:41 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	set_env(t_env **env, char *key, char *value)
 		if (!ft_strcmp(tmp->key, key))
 		{
 			if (value)
-				tmp->value = ft_gstrdup(value);
+				tmp->value = ft_strdup(value);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -63,7 +63,7 @@ static void	handle_chdir_error(char *path)
 static void	update_pwd_env(char *oldpwd, char *pwd, t_env **env)
 {
 	if (!set_env(env, "OLDPWD", oldpwd))
-		append_env(env, new_env("OLDPWD", ft_gstrdup("")));
+		append_env(env, new_env("OLDPWD", ft_strdup("")));
 	if (!set_env(env, "PWD", pwd))
 		append_env(env, new_env("PWD", pwd));
 	free(oldpwd);

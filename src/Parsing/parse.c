@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:52:28 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:41:56 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,20 +82,20 @@ void	join_tokens(t_tokenizer *token)
 			if (tmp->next && *tmp->next->stat == INQUOTES)
 			{
 				*tmp->stat = INQUOTES;
-				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+				tmp->token = ft_freq_strjoin(tmp->token, tmp->next->token);
 				tmp->next = tmp->next->next;
 			}
 			else if (tmp->next && *tmp->next->stat == INDQUOTES)
 			{
 				*tmp->stat = INDQUOTES;
-				tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+				tmp->token = ft_freq_strjoin(tmp->token, tmp->next->token);
 				tmp->next = tmp->next->next;
 			}
 			else
 			{
 					if (tmp->next)
 					{
-						tmp->token = ft_strjoin(tmp->token, tmp->next->token);
+						tmp->token = ft_freq_strjoin(tmp->token, tmp->next->token);
 						tmp->next = tmp->next->next;
 					}
 					else

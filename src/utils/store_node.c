@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:48:21 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:35:41 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_tokenizer	*new_token(void *content, t_lexer *type, \
 {
 	t_tokenizer	*head;
 
-	head = o_malloc(sizeof(t_tokenizer), 0);
+	head = o_malloc(sizeof(t_tokenizer), FREQ);
 	if (!head)
 		return (NULL);
 	head->token = content;

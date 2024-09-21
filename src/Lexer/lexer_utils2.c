@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 23:43:51 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 03:10:56 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat)
 		*stat = INDQUOTES;
 	else
 		*stat = GENERAL;
-	s = ft_substr(input, *j, *j + 1);
+	s = ft_freq_substr(input, *j, *j + 1);
 	node = new_token(s, &type[0], stat, false);
 	return (node);
 }
@@ -43,7 +43,7 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 	bool		joinable;
 
 	j = 0;
-	stat = o_malloc(sizeof(t_stat), 0);
+	stat = o_malloc(sizeof(t_stat), FREQ);
 	*stat = GENERAL;
 	joinable = false;
 	while (input[*i] && !check_word_input(input[*i]))
@@ -53,7 +53,7 @@ t_tokenizer	*token_word(char *input, t_lexer *type, int *i)
 	}
 	if (input[*i] && (input[*i] == '\'' || input[*i] == '"'))
 		joinable = true;
-	node = new_token(ft_substr(input, *i - j, *i), type, stat, joinable);
+	node = new_token(ft_freq_substr(input, *i - j, *i), type, stat, joinable);
 	return (node);
 }
 
@@ -67,7 +67,7 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 	1 && (j = *i, node = NULL);
 	if (input[*i] && input[*i] == '>' && input[*i + 1] == '>')
 	{
-		node = new_token(ft_substr(input, j, j + 2), &type[5], stat, false);
+		node = new_token(ft_freq_substr(input, j, j + 2), &type[5], stat, false);
 		(*i)++;
 	}
 	else if (input[*i] && input[*i] == '>' && input[*i + 1] != '>')
@@ -75,7 +75,7 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] == '<')
 	{
 		count++;
-		node = new_token(ft_substr(input, j, j + 2), &type[7], stat, false);
+		node = new_token(ft_freq_substr(input, j, j + 2), &type[7], stat, false);
 		(*i)++;
 	}
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] != '<')
@@ -95,7 +95,7 @@ t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i)
 
 	node = NULL;
 	j = *i;
-	stat = o_malloc(sizeof(t_stat), 0);
+	stat = o_malloc(sizeof(t_stat), FREQ);
 	if (input[*i] && input[*i] == '|')
 		node = make_node(input, i, &type[1], stat);
 	else if (input[*i] && input[*i] == '"')

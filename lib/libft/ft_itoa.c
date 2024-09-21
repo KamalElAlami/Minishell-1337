@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:55:50 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:45:27 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:39:51 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ char	*ft_itoa(int n)
 	num_len = get_num_len(num);
 	temp = get_num_temp(num);
 	if (n == 0)
-		return (ft_strdup("0"));
+		return (ft_freq_strdup("0"));
 	if (n < 0)
 	{
 		num = -(long long)n;
 		num_len++;
 	}
-	arr = o_malloc(num_len + 1, 0);
+	arr = o_malloc(num_len + 1, FREQ);
 	check_negative(n, arr, &i);
 	insertion(temp, arr, num, &i);
 	return (arr);

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:56:49 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:43:43 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
 	s = NULL;
 	if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
 	{
-		s = ft_split(tmp->token, ' ');
+		s = ft_freq_split(tmp->token, ' ');
 		while (s && s[j])
-			new->cmd[(*i)++] = ft_strdup(s[j++]);
+			new->cmd[(*i)++] = ft_freq_strdup(s[j++]);
 	}
 	else
-		new->cmd[(*i)++] = ft_strdup(tmp->token);
+		new->cmd[(*i)++] = ft_freq_strdup(tmp->token);
 }
 
 void	handle_non_word_token(t_tokenizer **tmp, t_cmd *new, int *j)
 {
-	new->red[(*j)++] = ft_strdup((*tmp)->token);
-	new->red[(*j)++] = ft_strdup((*tmp)->next->token);
+	new->red[(*j)++] = ft_freq_strdup((*tmp)->token);
+	new->red[(*j)++] = ft_freq_strdup((*tmp)->next->token);
 	*tmp = (*tmp)->next;
 }
 
@@ -80,7 +80,7 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		init_counters(index, count);
 		count_len(tmp, &count[0], &count[1]);
 		if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
-			count[0] = ft_split_len(ft_gsplit(tmp->token, ' '));
+			count[0] = ft_split_len(ft_freq_split(tmp->token, ' '));
 		new = new_cmd(count[0], count[1], tmp->stat, ft_strlen(tmp->token));
 		while (tmp && *tmp->type != PIPE)
 		{

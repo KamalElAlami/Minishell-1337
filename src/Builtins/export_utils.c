@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 16:12:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 03:54:01 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:55:42 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	isvalid(char *arg, int *join_flag)
 	if (!arg)
 		return (0);
 	if (ft_strchr(arg, '='))
-		id = ft_gsubstr(arg, 0, ft_strnchr(arg, '='));
+		id = ft_substr(arg, 0, ft_strnchr(arg, '='));
 	else
 		id = arg;
 	if (!ft_isalpha(id[0]) && id[0] != '_')

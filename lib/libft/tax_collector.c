@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 23:26:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/13 23:26:47 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:57:47 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,40 +35,36 @@ static void appand_taxes(t_collector **taxes, void *ptr)
 {
     t_collector *new_tax = malloc(sizeof(t_collector));
     if (!new_tax)
-    {
-        perror("malloc");
-        collect_taxes(taxes);
-        exit(1);
-    }
+        return (perror("Malloc :"));
     new_tax->ptr = ptr;
     new_tax->next = *taxes;
     *taxes = new_tax;
 }
 
-void *o_malloc(size_t size, int flag)
+void *o_malloc(size_t size, t_malloc flag)
 {
-    static t_collector *taxes = NULL;
-    // static int allocation_count = 0;
+    static t_collector *freq_taxes = NULL;
+    static t_collector *end_taxes = NULL;
     
-    if (flag == 0)
+    if (flag == FREQ)
     {
         void *ptr = malloc(size);
         if (!ptr)
-        {
-            perror("malloc");
-            collect_taxes(&taxes);
-            exit(1);
-        }
-        appand_taxes(&taxes, ptr);
-        // allocation_count++;
-        // printf("Allocation %d: %zu bytes at %p\n", allocation_count, size, ptr);
+            return(perror("Malloc :"), NULL);
+        appand_taxes(&freq_taxes, ptr);
         return ptr;
     }
-    else
+    else if (flag == END)
     {
-        // printf("Freeing all allocations. Total allocations: %d\n", allocation_count);
-        collect_taxes(&taxes);
-        // allocation_count = 0;
+        void *ptr = malloc(size);
+        if (!ptr)
+            return(perror("Malloc :"), NULL);
+        appand_taxes(&end_taxes, ptr);
+        return ptr;
     }
+    else if (flag == CLEAR_FREQ)
+        collect_taxes(&freq_taxes);
+    else if (flag == CLEAR_END)
+        collect_taxes(&end_taxes);
     return NULL;
 }

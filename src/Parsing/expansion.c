@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:23:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/20 15:16:28 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 03:20:27 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	process_dollar_var(char *token, int *i, \
 		while (ft_isalnum(token[*i]) || token[*i] == '_'\
 			|| ft_isalpha(token[*i]))
 			(*i)++;
-		str = get_value(mini, ft_gsubstr(token, j, *i));
-		*join_it = ft_strjoin(*join_it, str);
+		str = get_value(mini, ft_freq_substr(token, j, *i));
+		*join_it = ft_freq_strjoin(*join_it, str);
 	}
 }
 
@@ -60,8 +60,8 @@ static void	process_non_dollar(char *token, int *i, char **join_it)
 	j = *i;
 	while (token[*i] && token[*i] != '$')
 		(*i)++;
-	str = ft_substr(token, j, *i);
-	*join_it = ft_strjoin(*join_it, str);
+	str = ft_freq_substr(token, j, *i);
+	*join_it = ft_freq_strjoin(*join_it, str);
 }
 
 char	*expansion(char *token, t_minishell *mini)
@@ -82,7 +82,7 @@ char	*expansion(char *token, t_minishell *mini)
 	{
 		free(token);
 		token = NULL;
-		token = ft_gstrdup(join_it);
+		token = ft_strdup(join_it);
 	}
 	return (token);
 }

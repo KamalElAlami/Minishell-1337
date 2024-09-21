@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:21:47 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/19 17:58:51 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:47:18 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	hardcode_env(t_env **env)
 	append_env(env, new_env(ft_strdup("PATH"), \
 		ft_strdup("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin")));
 	append_env(env, new_env(ft_strdup("PWD"), \
-		ft_strdup("/Users/omghazi/Desktop/minishell")));
+		ft_strdup("/Users/omghazi/Desktop/minishell"))); // ?????
 	append_env(env, new_env(ft_strdup("SHLVL"), ft_strdup("1")));
 	append_env(env, new_env(ft_strdup("_"), ft_strdup("/usr/bin/env")));
 }
@@ -56,8 +56,9 @@ static void	process_line(t_minishell *minishell, \
 	parse_input(minishell, cmds);
 	if (minishell->line)
 	{
-		*cmds = NULL;
 		*lexer = NULL;
+		*cmds = NULL;
+		o_malloc(0, CLEAR_FREQ);
 		add_history(minishell->line);
 		free(minishell->line);
 		close_all();
@@ -76,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 		return (printf("minishell: %s: No such file or directory\n", argv[1]), 127);
 	if (isatty(0) == 0)
 		return (ft_putstr_fd("minishell only reads from tty\n", 2), 1);
-	minishell = o_malloc(sizeof(t_minishell), 0);
+	minishell = o_malloc(sizeof(t_minishell), END);
 	minishell->envirement = env;
 	init_minishell(&minishell, &envr, &lexer, &cmds);
 	while (1)
@@ -87,12 +88,11 @@ int	main(int argc, char **argv, char **env)
 		if (g_exit_stts == 1)
 			minishell->ret_value = 1;
 		if (!minishell->line)
-			return (minishell->ret_value);
+			break ;
 		process_line(minishell, &lexer, &cmds);
 	}
 	status = minishell->ret_value;
-	o_malloc(0, 1);
+	o_malloc(0, CLEAR_END);
 	clear_history();
-	clear_env(&envr, free);
 	return (status);
 }

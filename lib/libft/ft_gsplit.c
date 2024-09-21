@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:04:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/14 00:15:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:56:40 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	**split(char **strs, char const *s, char c)
 			len = 0;
 			while (s[len] && s[len] != c)
 				len++;
-			strs[i] = ft_gsubstr(s, 0, len);
+			strs[i] = ft_freq_substr(s, 0, len);
 			if (!strs[i])
 				return (free_memory(strs, i));
 			s += len;
@@ -69,12 +69,12 @@ static char	**split(char **strs, char const *s, char c)
 	return (strs);
 }
 
-char	**ft_gsplit(char const *s, char c)
+char	**ft_freq_split(char const *s, char c)
 {
 	char	**strs;
 
 	if (!s)
 		return (NULL);
-	strs = o_malloc(sizeof(char *) * ((count_words(s, c) + 1)), 0);
+	strs = o_malloc(sizeof(char *) * ((count_words(s, c) + 1)), FREQ);
 	return (split(strs, s, c));
 }

@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 09:42:00 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/14 00:29:29 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/21 02:53:12 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	execution(t_minishell *mini, t_cmd *cmds)
 	}
 	else
 	{
-		mini->pipe = o_malloc(sizeof(int *) * node_len(cmds) - 1, 0);
+		mini->pipe = o_malloc(sizeof(int *) * node_len(cmds) - 1, FREQ);
 		if (!mini->pipe)
 			return (1);
 		return (multi_process(mini, cmds));
