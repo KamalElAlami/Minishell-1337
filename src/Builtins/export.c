@@ -6,11 +6,17 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/19 17:50:31 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/22 16:01:18 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+void print_error(char *str)
+{
+	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd(cmd->cmd[i], 2);
+	ft_putendl_fd(": not a valid identifier", 2);
+}
 
 void	print_export(t_env *env)
 {
@@ -81,7 +87,9 @@ int	export(t_cmd *cmd, t_env **env)
 				add_value(id, value, env, flag);
 			}
 			else
-				printf("export: %s: not a valid identifier\n", cmd->cmd[i]);
+				ft_putstr_fd("export: ", 2);
+				ft_putstr_fd(cmd->cmd[i], 2);
+				ft_putendl_fd(": not a valid identifier", 2);
 			i++;
 		}
 	}

@@ -56,9 +56,9 @@ static void	process_line(t_minishell *minishell, \
 	parse_input(minishell, cmds);
 	if (minishell->line)
 	{
+		o_malloc(0, CLEAR_FREQ);
 		*lexer = NULL;
 		*cmds = NULL;
-		o_malloc(0, CLEAR_FREQ);
 		add_history(minishell->line);
 		free(minishell->line);
 		close_all();

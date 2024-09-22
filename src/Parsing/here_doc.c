@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 03:21:24 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:47:56 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	here_doc_hundle(t_tokenizer *delimiter, t_minishell *mini)
 			break ;
 		}
 		if (*delimiter->stat == GENERAL)
-			input = expansion(input, mini);
+			input = expansion_heredoc(input, mini);
 		write(mini->fdin, input, ft_strlen(input));
 		write(mini->fdin, "\n", 1);
 	}

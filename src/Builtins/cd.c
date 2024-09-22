@@ -6,7 +6,7 @@
 /*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:38 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 02:49:41 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/22 15:58:00 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	handle_chdir_error(char *path)
 	{
 		ft_putstr_fd("Minishell : cd: ", 2);
 		ft_putstr_fd(path, 2);
-		ft_putendl_fd(" No such file or directory ", 2);
+		ft_putendl_fd("HOME not set ", 2);
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 12:55:29 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/22 15:48:22 by kael-ala         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void		clear_token(t_tokenizer **lst, void (*del)(void *));
 int			lexer_first(t_tokenizer **token, char *input);
 void		parse_input(t_minishell *mini, t_cmd **cmds);
 void		append_token(t_tokenizer **tokens, t_tokenizer *token);
+char		*expansion_heredoc(char *token, t_minishell *mini);
 int			ft_isspace(char c);
 int			is_special(int c);
 

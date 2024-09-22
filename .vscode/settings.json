@@ -20,7 +20,14 @@
         "utility": "c",
         "__functional_03": "c",
         "stdbool.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "types.h": "c",
+        "__bit_reference": "c",
+        "bitset": "c",
+        "__memory": "c",
+        "optional": "c",
+        "system_error": "c",
+        "vector": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
