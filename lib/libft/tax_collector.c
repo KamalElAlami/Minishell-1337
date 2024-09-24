@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 23:26:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/24 11:40:54 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/24 14:23:43 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	*o_malloc(size_t size, t_malloc flag)
 	static t_collector	*end_taxes;
 	void				*ptr;
 
-	1 && (freq_taxes = NULL, end_taxes = NULL);
 	if (flag == FREQ)
 	{
 		ptr = malloc(size);
