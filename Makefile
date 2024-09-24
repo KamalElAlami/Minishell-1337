@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+         #
+#    By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/01 15:45:53 by omghazi           #+#    #+#              #
-#    Updated: 2024/09/22 15:54:25 by kael-ala         ###   ########.fr        #
+#    Updated: 2024/09/23 14:58:46 by omghazi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INCS			= $(INCS_DIR)minishell.h $(INCS_DIR)types.h
 LIBFT_DIR		= lib/libft/
 LIBFT			= $(LIBFT_DIR)libft.a
 CFLAGS			= -I$(INCS_DIR) -I$(LIBFT_DIR) 
-CFLAGS			+= -Wall -Werror -Wextra -I/Users/kael-ala/.brew/opt/readline/include -g #-fsanitize=address
+CFLAGS			+= -Wall -Werror -Wextra -I/Users/omghazi/.brew/opt/readline/include -g #-fsanitize=address
 NAME			= minishell
 RM			= rm -rf
 ERASE			= \033[2K\r
@@ -31,7 +31,7 @@ BLUE			= \033[34m
 YELLOW			= \033[33m
 GREEN			= \033[32m
 END			= \033[0m
-LDFLAGS			= -L/Users/kael-ala/.brew/opt/readline/lib -lreadline -lhistory
+LDFLAGS			= -L/Users/omghazi/.brew/opt/readline/lib -lreadline -lhistory
 
 all:			$(NAME)
 

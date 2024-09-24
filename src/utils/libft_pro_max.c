@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_pro_max.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 11:23:13 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 03:02:44 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:00:16 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	count_len(t_tokenizer *lst, int *commands_len, int *redirection_len)
 			if (*tmp->stat == GENERAL && !ft_strlen(tmp->token))
 			{
 				tmp = tmp->next;
-				continue;
+				continue ;
 			}
 			(*commands_len)++;
 			tmp = tmp->next;

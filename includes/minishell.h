@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:53 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/22 15:48:22 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:44:20 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,20 @@
 volatile sig_atomic_t	g_exit_stts;
 
 /* FUNCTIONS */
-void safe_clean(t_minishell *mini, t_cmd **cmds, t_tokenizer **lexer);
-void free_array(char **array);
-void	clear_env(t_env **lst, void (*del)(void *));
+void		join_tokens(t_tokenizer *token);
+void		ft_export_error(char *cmd);
+int			is_special_char(int c);
+int			ft_split_len(char **s);
+void		hardcode_env(t_env **env);
+void		process_non_dollar(char *token, int *i, char **join_it);
+void		process_dollar(char *token, int *i, char **join_it, \
+	t_minishell *mini);
+void		process_dollar_dollar(char *token, int *i, t_minishell **mini);
+void		process_dollar_var(char *token, int *i, char **join_it, \
+	t_minishell **mini);
+void		safe_clean(t_minishell *mini, t_cmd **cmds, t_tokenizer **lexer);
+void		free_array(char **array);
+void		clear_env(t_env **lst, void (*del)(void *));
 int			is_directory(char *cmd);
 int			check_wrong_command(char *cmd);
 int			ft_split_len(char **s);
@@ -50,13 +61,12 @@ int			join_string(char c, char next_c, int is_last, int *flag);
 int			ft_strnchr(const char *s, int c);
 t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat);
 t_tokenizer	*token_word(char *input, t_lexer *type, int *i);
-t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
-	int *i, t_stat *stat);
+t_tokenizer	*sub_redirection(char *input, t_lexer *type, int *i, t_stat *stat);
 t_tokenizer	*token_special_char(char *input, t_lexer *type, int *i);
 int			check_dquotes(t_stat **stat, char *input, int *i, int *j);
 int			check_squotes(t_stat **stat, char *input, int *i, int *j);
-void		process_dollar_question(char *token, int *i, char **join_it, \
-				t_minishell *mini);
+void		process_dollar_question(char *token, int *i, \
+	char **join_it, t_minishell *mini);
 int			process(t_minishell *mini, t_cmd *cmds, int input, int output);
 int			check_word_input(char c);
 void		print_state(t_stat stat);
@@ -88,7 +98,7 @@ int			cd(t_cmd *cmd, t_env *env);
 int			unset(t_cmd *token, t_env **env);
 void		send_to_execution(t_tokenizer *token, t_cmd **cmd);
 void		count_len(t_tokenizer *lst, int *commands_len, \
-				int *redirection_len);
+	int *redirection_len);
 void		clear_cmd(t_cmd **cmd);
 void		del_one_cmd(t_cmd *cmds);
 t_cmd		*new_cmd(int cmd, int red, t_stat *stat, int len);
@@ -98,10 +108,10 @@ int			ft_strcmp(char *s1, char *s2);
 int			here_doc(t_tokenizer *delimiter, t_minishell *mini);
 char		*expansion(char *token, t_minishell *mini);
 int			store_env(char **envr, t_env **env);
-t_tokenizer	*check_signle_quotes(char *input, int *i, t_lexer *type, \
-				t_stat *stat);
-t_tokenizer	*check_double_quotes(char *input, int *i, t_lexer *type, \
-				t_stat *stat);
+t_tokenizer	*check_signle_quotes(char *input, int *i, \
+	t_lexer *type, t_stat *stat);
+t_tokenizer	*check_double_quotes(char *input, int *i, \
+	t_lexer *type, t_stat *stat);
 t_tokenizer	*make_node(char *input, int *j, t_lexer *type, t_stat *stat);
 t_tokenizer	*new_token(void *content, t_lexer *type, \
 	t_stat *stat, bool joinable);

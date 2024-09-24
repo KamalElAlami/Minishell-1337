@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 18:41:48 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/22 15:47:56 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:29:05 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+char	*expansion_heredoc(char *token, t_minishell *mini)
+{
+	char	*join_it;
+	int		i;
+
+	i = 0;
+	join_it = NULL;
+	while (token[i])
+	{
+		if (token[i] == '$')
+			process_dollar(token, &i, &join_it, mini);
+		else
+			process_non_dollar(token, &i, &join_it);
+	}
+	if (join_it)
+	{
+		free(token);
+		token = NULL;
+		token = ft_strdup(join_it);
+	}
+	return (token);
+}
 
 void	here_hundle(int sig)
 {

@@ -3,108 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 07:55:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 21:25:03 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:22:48 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static int	handle_pipe_error(t_tokenizer *token)
+{
+	return (printf("syntax error near unexpected token `%s'\n", \
+		token->token), 258);
+}
+
+static int	handle_redirection_error(t_tokenizer *token)
+{
+	return (printf("syntax error near unexpected token `%s'\n", \
+		token->token), 258);
+}
+
+static int	check_syntax_errors(t_tokenizer *token)
+{
+	if (*token->type == PIPE && !token->next)
+		return (handle_pipe_error(token));
+	if ((*token->type == LESS || *token->type == GREAT \
+		|| *token->type == GREATGREAT) \
+			&& token->next && (*token->next->type == LESS \
+				|| *token->next->type == GREAT \
+					|| *token->next->type == GREATGREAT))
+		return (handle_redirection_error(token));
+	return (0);
+}
+
 int	check_validation(t_tokenizer *token, t_minishell *mini)
 {
 	if (token && *token->type == PIPE)
-		return (printf("syntax error near unexpected token `%s'\n", \
-			token->token), 258);
+		return (handle_pipe_error(token));
 	while (token)
 	{
 		if (g_exit_stts == 6)
 			return (-1);
-		if (token && *token->type != WORD && !token->next)
-			return (printf("syntax error near unexpected token `%s'\n", \
-				token->token), 258);
+		if (*token->type != WORD && !token->next)
+			return (handle_pipe_error(token));
 		if (*token->type == LESSLESS && *token->next->type == WORD)
 			if (!here_doc(token->next, mini))
-		if (*token->type == PIPE && *token->type == PIPE)
-			return (printf("syntax error near unexpected token `%s'\n", \
-				token->token), 258);
-		if (*token->type == LESS || *token->type == GREAT || *token->type == GREATGREAT)
-		{
-			if (token->next)
-				if (*token->next->type == LESS || *token->next->type == GREAT || *token->next->type == GREATGREAT)
-					return (printf("syntax error near unexpected token `%s'\n", \
-						token->token), 258);
-		}
+				return (-1);
+		if (check_syntax_errors(token))
+			return (258);
 		if (ft_strchr(token->token, '$') && *token->stat != INQUOTES)
 			token->token = expansion(token->token, mini);
 		token = token->next;
 	}
 	return (1);
-}
-
-void	remove_quotes(t_tokenizer *token)
-{
-	t_tokenizer	*tmp;
-	int			i;
-	char		*str;
-	char		*old_token;
-
-	tmp = token;
-	while (tmp)
-	{
-		i = 0;
-		if (*tmp->stat == INDQUOTES || *tmp->stat == INQUOTES)
-		{
-			if (*tmp->stat == INDQUOTES)
-				str = remove_dquotes(tmp, &i);
-			else
-				str = remove_squotes(tmp, &i);
-			if (str)
-			{
-				old_token = tmp->token;
-				tmp->token = str;
-			}
-		}
-		tmp = tmp->next;
-	}
-}
-
-void	join_tokens(t_tokenizer *token)
-{
-	t_tokenizer	*tmp;
-
-	tmp = token;
-	while (tmp)
-	{
-		if (tmp->joinable == 1 || (tmp->prev && tmp->prev->joinable == 1))
-		{
-			if (tmp->next && *tmp->next->stat == INQUOTES)
-			{
-				*tmp->stat = INQUOTES;
-				tmp->token = ft_freq_strjoin(tmp->token, tmp->next->token);
-				tmp->next = tmp->next->next;
-			}
-			else if (tmp->next && *tmp->next->stat == INDQUOTES)
-			{
-				*tmp->stat = INDQUOTES;
-				tmp->token = ft_freq_strjoin(tmp->token, tmp->next->token);
-				tmp->next = tmp->next->next;
-			}
-			else
-			{
-					if (tmp->next)
-					{
-						tmp->token = ft_freq_strjoin(tmp->token, tmp->next->token);
-						tmp->next = tmp->next->next;
-					}
-					else
-						tmp = tmp->next;
-			}
-		}
-		else
-			tmp = tmp->next;
-	}
 }
 
 void	parse_input(t_minishell *mini, t_cmd **cmds)

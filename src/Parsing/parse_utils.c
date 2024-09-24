@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 10:35:41 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 02:43:43 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:52:47 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,6 @@ void	init_counters(int *index, int *count)
 	index[1] = 0;
 	count[0] = 0;
 	count[1] = 0;
-}
-
-int	ft_split_len(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
 }
 
 void	handle_word_token(t_tokenizer *tmp, t_cmd *new, int *i)
@@ -54,16 +44,20 @@ void	handle_non_word_token(t_tokenizer **tmp, t_cmd *new, int *j)
 	*tmp = (*tmp)->next;
 }
 
-void	print_cmd(t_cmd *cmd)
+void	fill_exec_process(t_tokenizer **tmp, int *index, t_cmd **new)
 {
-	t_cmd *tmp;
-
-	tmp = cmd;
-	while (tmp)
+	while (*tmp && *(*tmp)->type != PIPE)
 	{
-		for (int i = 0; tmp->cmd[i]; i++)
-			printf("%s\n", tmp->cmd[i]);
-		tmp = tmp->next;
+		if (*tmp && *(*tmp)->stat == GENERAL && ft_strlen((*tmp)->token) == 0)
+			*tmp = (*tmp)->next;
+		else
+		{
+			if (*(*tmp)->type == WORD)
+				handle_word_token(*tmp, *new, &index[0]);
+			else
+				handle_non_word_token(tmp, *new, &index[1]);
+			*tmp = (*tmp)->next;
+		}
 	}
 }
 
@@ -82,19 +76,7 @@ void	send_to_execution(t_tokenizer *token, t_cmd **cmd)
 		if (ft_strchr(tmp->token, ' ') && *tmp->stat == GENERAL)
 			count[0] = ft_split_len(ft_freq_split(tmp->token, ' '));
 		new = new_cmd(count[0], count[1], tmp->stat, ft_strlen(tmp->token));
-		while (tmp && *tmp->type != PIPE)
-		{
-			if (tmp && *tmp->stat == GENERAL && ft_strlen(tmp->token) == 0)
-				tmp = tmp->next;
-			else
-			{
-				if (*tmp->type == WORD)
-					handle_word_token(tmp, new, &index[0]);
-				else
-					handle_non_word_token(&tmp, new, &index[1]);
-				tmp = tmp->next;
-			}
-		}
+		fill_exec_process(&tmp, index, &new);
 		append_to_exec(cmd, new);
 		if (tmp && tmp->next)
 			tmp = tmp->next;

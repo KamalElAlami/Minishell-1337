@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:46:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 03:30:47 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:03:32 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_valid(char c)
 	return (c == '+' || c == '-' || (c >= '0' && c <= '9'));
 }
 
-int	ft_exit_error()
+int	ft_exit_error(void)
 {
 	ft_putendl_fd("exit", 2);
 	ft_putendl_fd("Minishell : exit: too many arguments", 2);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 12:44:36 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 02:43:04 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:54:13 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,9 @@ void	clear_cmd(t_cmd **cmd)
 		del_one_cmd(*cmd);
 		*cmd = tmp;
 	}
+}
+
+int	is_special_char(int c)
+{
+	return (c == '|' || c == '>' || c == '<' || c == ' ' || c == '*');
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:35:18 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 03:10:56 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:55:37 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	check_word_input(char c)
 {
-	if (c == '|' || c == '>' || c == '<' || c == ' ' || c == '\t' || c == '"' || c == '\'')
+	if (c == '|' || c == '>' || c == '<' \
+		|| c == ' ' || c == '\t' || c == '"' || c == '\'')
 		return (1);
 	return (0);
 }
@@ -66,18 +67,13 @@ t_tokenizer	*sub_redirection(char *input, t_lexer *type, \
 
 	1 && (j = *i, node = NULL);
 	if (input[*i] && input[*i] == '>' && input[*i + 1] == '>')
-	{
-		node = new_token(ft_freq_substr(input, j, j + 2), &type[5], stat, false);
-		(*i)++;
-	}
+		1 && (node = new_token(ft_freq_substr(input, j, j + 2), \
+			&type[5], stat, false), (*i)++);
 	else if (input[*i] && input[*i] == '>' && input[*i + 1] != '>')
 		node = make_node(input, &j, &type[4], stat);
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] == '<')
-	{
-		count++;
-		node = new_token(ft_freq_substr(input, j, j + 2), &type[7], stat, false);
-		(*i)++;
-	}
+		1 && (count++, node = new_token(ft_freq_substr(input, j, j + 2), \
+			&type[7], stat, false), (*i)++);
 	else if (input[*i] && input[*i] == '<' && input[*i + 1] != '<')
 		node = make_node(input, &j, &type[6], stat);
 	else if (input[*i] && input[*i] == ' ')

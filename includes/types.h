@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 12:22:49 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/07 17:20:13 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/24 11:14:13 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #define SUCCESS	 		0
 #define UNKNOWN_COMMAND 	127
 #define IS_DIR 			126
-#define NO_EXPAND 			-1337
 
 typedef struct s_node				t_node;
 typedef struct s_minishell			t_minishell;
@@ -96,4 +95,3 @@ struct s_env
 	char			*value;
 	struct s_env	*next;
 };
-

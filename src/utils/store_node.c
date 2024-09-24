@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 06:08:52 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 02:35:41 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:37:43 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,14 @@ void	clear_token(t_tokenizer **lst, void (*del)(void *))
 		del_one_token(*lst, del);
 		*lst = tmp;
 	}
+}
+
+void	hardcode_env(t_env **env)
+{
+	append_env(env, new_env(ft_strdup("PATH"), \
+		ft_strdup("/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin")));
+	append_env(env, new_env(ft_strdup("PWD"), \
+		ft_strdup("/Users/omghazi/Desktop/minishell")));
+	append_env(env, new_env(ft_strdup("SHLVL"), ft_strdup("1")));
+	append_env(env, new_env(ft_strdup("_"), ft_strdup("/usr/bin/env")));
 }

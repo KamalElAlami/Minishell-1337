@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 13:23:24 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/22 15:53:35 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/23 15:29:48 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	process_dollar_dollar(char *token, int *i, t_minishell **mini)
+void	process_dollar_dollar(char *token, int *i, t_minishell **mini)
 {
 	int	nbr;
 
@@ -25,7 +25,7 @@ static void	process_dollar_dollar(char *token, int *i, t_minishell **mini)
 	(*mini)->count = nbr;
 }
 
-static void	process_dollar_var(char *token, int *i, \
+void	process_dollar_var(char *token, int *i, \
 	char **join_it, t_minishell **mini)
 {
 	char	*str;
@@ -43,7 +43,7 @@ static void	process_dollar_var(char *token, int *i, \
 	}
 }
 
-static void	process_dollar(char *token, int *i, \
+void	process_dollar(char *token, int *i, \
 	char **join_it, t_minishell *mini)
 {
 	mini->count = 0;
@@ -52,7 +52,7 @@ static void	process_dollar(char *token, int *i, \
 	process_dollar_var(token, i, join_it, &mini);
 }
 
-static void	process_non_dollar(char *token, int *i, char **join_it)
+void	process_non_dollar(char *token, int *i, char **join_it)
 {
 	char	*str;
 	int		j;
@@ -80,28 +80,5 @@ char	*expansion(char *token, t_minishell *mini)
 	}
 	if (join_it)
 		token = ft_strdup(join_it);
-	return (token);
-}
-
-char	*expansion_heredoc(char *token, t_minishell *mini)
-{
-	char	*join_it;
-	int		i;
-
-	i = 0;
-	join_it = NULL;
-	while (token[i])
-	{
-		if (token[i] == '$')
-			process_dollar(token, &i, &join_it, mini);
-		else
-			process_non_dollar(token, &i, &join_it);
-	}
-	if (join_it)
-	{
-		free(token);
-		token = NULL;
-		token = ft_strdup(join_it);
-	}
 	return (token);
 }

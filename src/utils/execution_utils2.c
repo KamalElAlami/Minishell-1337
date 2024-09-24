@@ -6,7 +6,7 @@
 /*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 14:26:01 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/13 11:26:29 by omghazi          ###   ########.fr       */
+/*   Updated: 2024/09/24 11:24:27 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,21 @@ int	is_builtins(t_cmd *cmds)
 			return (1);
 	}
 	return (0);
+}
+
+void	ft_export_error(char *cmd)
+{
+	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": not a valid identifier", 2);
+}
+
+int	ft_split_len(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
 }

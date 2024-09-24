@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 21:37:09 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/22 16:01:18 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:01:58 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-void print_error(char *str)
-{
-	ft_putstr_fd("export: ", 2);
-	ft_putstr_fd(cmd->cmd[i], 2);
-	ft_putendl_fd(": not a valid identifier", 2);
-}
 
 void	print_export(t_env *env)
 {
@@ -65,6 +59,7 @@ void	add_value(char *id, char *value, t_env **env, int flag)
 	if (!found)
 		add_new_node(id, value, env);
 }
+
 int	export(t_cmd *cmd, t_env **env)
 {
 	int		i;
@@ -87,9 +82,7 @@ int	export(t_cmd *cmd, t_env **env)
 				add_value(id, value, env, flag);
 			}
 			else
-				ft_putstr_fd("export: ", 2);
-				ft_putstr_fd(cmd->cmd[i], 2);
-				ft_putendl_fd(": not a valid identifier", 2);
+				ft_export_error(cmd->cmd[i]);
 			i++;
 		}
 	}

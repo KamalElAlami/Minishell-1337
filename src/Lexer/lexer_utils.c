@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 14:20:23 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 02:36:44 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 10:54:03 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	is_special_char(int c)
-{
-	return (c == '|' || c == '>' || c == '<' || c == ' ' || c == '*');
-}
 
 t_tokenizer	*check_signle_quotes(char *input, int *i, t_lexer *type, \
 		t_stat *stat)

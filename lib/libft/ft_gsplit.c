@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_gsplit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:04:42 by kael-ala          #+#    #+#             */
-/*   Updated: 2024/09/21 02:56:40 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:44:01 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	*free_memory(char **strs, int i)
 	while (i--)
 		free(strs[i]);
 	free(strs);
-    strs = NULL;
+	strs = NULL;
 	return (NULL);
 }
 

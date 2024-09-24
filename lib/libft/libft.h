@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kael-ala <kael-ala@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omghazi <omghazi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 04:08:42 by omghazi           #+#    #+#             */
-/*   Updated: 2024/09/21 02:27:48 by kael-ala         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:43:17 by omghazi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef enum e_malloc
 	END,
 	CLEAR_FREQ,
 	CLEAR_END,
-} t_malloc;
+}	t_malloc;
 
 typedef struct s_list
 {
@@ -85,8 +85,7 @@ size_t		ft_strlen(const char *s);
 t_list		*ft_lstnew(void *content);
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
-void 		*o_malloc(size_t size, t_malloc flag);
+void		*o_malloc(size_t size, t_malloc flag);
 char		*ft_freq_substr(char const *s, unsigned int start, size_t len);
 char		**ft_freq_split(char const *s, char c);
 char		*ft_freq_strdup(const char *s1);
